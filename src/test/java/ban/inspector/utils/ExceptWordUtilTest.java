@@ -12,7 +12,7 @@ import static ban.inspector.RemoveNotKorean.*;
 
 class ExceptWordUtilTest {
 
-    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil();
+    private static final ExceptWordUtilImpl exceptWordUtil = new ExceptWordUtilImpl();
 
     @BeforeAll
     public static void setUp() {

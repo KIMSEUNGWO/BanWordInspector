@@ -1,6 +1,5 @@
 package ban.inspector.utils;
 
-import ban.inspector.RemoveNotKorean;
 import ban.inspector.dto.WordDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class BanWordUtilTest {
 
-    private static final BanWordUtil banWordUtil = new BanWordUtil();
+    private static final BanWordUtilImpl banWordUtil = new BanWordUtilImpl();
 
     @BeforeAll
     public static void setUp() {

@@ -4,11 +4,8 @@ import ban.inspector.domain.BanWord;
 import ban.inspector.domain.ExceptWord;
 import ban.inspector.repository.JpaBanWordRepository;
 import ban.inspector.repository.JpaExceptWordRepository;
-import ban.inspector.utils.BanWordUtil;
-import ban.inspector.utils.ExceptWordUtil;
-import ban.inspector.utils.WordUtil;
+import ban.inspector.utils.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +13,7 @@ import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
-public class Config implements InspectConfig {
+public class WordConfig implements InspectConfig {
 
     private final JpaBanWordRepository jpaBanWordRepository;
     private final JpaExceptWordRepository jpaExceptWordRepository;
@@ -32,12 +29,14 @@ public class Config implements InspectConfig {
     }
 
     @Bean
-    WordUtil banWordUtil() {
-        return new BanWordUtil();
+    BanWordUtil banWordUtil() {
+        return new BanWordUtilImpl();
     }
 
     @Bean
     ExceptWordUtil exceptWordUtil() {
-        return new ExceptWordUtil();
+        return new ExceptWordUtilImpl();
     }
+
+
 }

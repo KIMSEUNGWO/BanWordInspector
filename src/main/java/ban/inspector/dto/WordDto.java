@@ -15,6 +15,11 @@ public class WordDto {
         this.endIndex = startIndex + word.length();
     }
 
+    public boolean isSame(StringBuilder sb) {
+        if (sb.length() < endIndex) return false;
+        return word.equals(sb.substring(startIndex, endIndex));
+    }
+
     @Override
     public String toString() {
         return String.format("word = %s, startIndex = %d, endIndex = %d", word, startIndex, endIndex);

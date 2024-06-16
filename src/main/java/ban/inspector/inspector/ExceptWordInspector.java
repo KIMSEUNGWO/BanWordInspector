@@ -3,33 +3,37 @@ package ban.inspector.inspector;
 import ban.inspector.config.InspectConfig;
 import ban.inspector.dto.WordDto;
 import ban.inspector.utils.ExceptWordUtil;
+import ban.inspector.utils.WordUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class ExceptWordInspector {
+public class ExceptWordInspector extends AbstractWordInspector {
 
-    private final InspectConfig config;
-    private final ExceptWordUtil exceptWordUtil;
+    private final ExceptWordUtil wordUtil;
 
-    public ExceptWordInspector(InspectConfig config, @Qualifier("exceptWordUtil") ExceptWordUtil exceptWordUtil) {
-        this.config = config;
-        this.exceptWordUtil = exceptWordUtil;
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
-        config.initExceptWords().forEach(exceptWordUtil::addWord);
+    @Autowired
+    public ExceptWordInspector(InspectConfig config, @Qualifier("exceptWordUtil") ExceptWordUtil wordUtil) {
+        super(config);
+        this.wordUtil = wordUtil;
     }
 
     public List<String> inspect(String newWord, List<WordDto> badWords) {
-        return exceptWordUtil.filter(newWord, badWords).stream()
+        return wordUtil.filter(newWord, badWords).stream()
             .map(WordDto::getWord)
             .toList();
     }
 
+    @Override
+    protected WordUtil wordUtil() {
+        return wordUtil;
+    }
+
+    @Override
+    protected List<String> initWords(InspectConfig config) {
+        return config.initExceptWords();
+    }
 }

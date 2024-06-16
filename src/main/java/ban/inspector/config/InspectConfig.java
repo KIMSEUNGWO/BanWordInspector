@@ -6,4 +6,5 @@ public interface InspectConfig {
 
     List<String> initBanWords();
     List<String> initExceptWords();
+
 }

@@ -2,31 +2,37 @@ package ban.inspector.inspector;
 
 import ban.inspector.config.InspectConfig;
 import ban.inspector.dto.WordDto;
+import ban.inspector.utils.BanWordUtil;
 import ban.inspector.utils.WordUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class BanWordInspector {
+public class BanWordInspector extends AbstractWordInspector {
 
-    private final InspectConfig config;
-    private final WordUtil banWordUtil;
+    private final BanWordUtil wordUtil;
 
-    public BanWordInspector(InspectConfig config, @Qualifier("banWordUtil") WordUtil banWordUtil) {
-        this.config = config;
-        this.banWordUtil = banWordUtil;
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
-        config.initBanWords().forEach(banWordUtil::addWord);
+    @Autowired
+    public BanWordInspector(InspectConfig config, @Qualifier("banWordUtil") BanWordUtil wordUtil) {
+        super(config);
+        this.wordUtil = wordUtil;
     }
 
     public List<WordDto> inspect(String newWord) {
-        return banWordUtil.has(newWord);
+        return wordUtil.has(newWord);
+    }
+
+
+    @Override
+    protected WordUtil wordUtil() {
+        return wordUtil;
+    }
+
+    @Override
+    protected List<String> initWords(InspectConfig config) {
+        return config.initBanWords();
     }
 }

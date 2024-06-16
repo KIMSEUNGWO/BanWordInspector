@@ -1,12 +1,11 @@
 package ban.inspector.utils;
 
-import org.springframework.stereotype.Component;
+import ban.inspector.dto.WordDto;
 
-@Component
-public class BanWordUtil extends AbstractWordUtil {
+import java.util.List;
 
-    @Override
-    protected AbstractWordUtil getInstance() {
-        return new BanWordUtil();
-    }
+public interface BanWordUtil extends WordUtil {
+
+    List<WordDto> has(String word);
+
 }
