@@ -20,17 +20,15 @@ public class BanWordServiceImpl implements BanWordService {
 
     @Override
     public Optional<Response> valid(String word) {
-        String newWord = removeNotHangul(word);
+        String newWord = removeNotKorean(word);
         List<WordDto> badWords = banInspector.inspect(newWord);
-        System.out.println("badWords = " + badWords);
         List<String> badWords2 = exceptInspector.inspect(newWord, badWords);
-        System.out.println("badWords2 = " + badWords2);
         return (!badWords2.isEmpty()) ?
             Optional.of(new BanWordListResponse(badWords2)) :
             Optional.empty();
     }
 
-    private String removeNotHangul(String word) {
+    private String removeNotKorean(String word) {
         return word.replaceAll("[^가-힣]", "");
     }
 }

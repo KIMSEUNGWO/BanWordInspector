@@ -4,10 +4,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class ExceptWordUtilImpl extends AbstractExceptWordUtil {
+public class BanWordUtilImpl extends AbstractBanWordUtil {
 
     @Override
     protected WordData getInstance() {
-        return null;
+        return new BanWordUtilImpl();
     }
+
 }
