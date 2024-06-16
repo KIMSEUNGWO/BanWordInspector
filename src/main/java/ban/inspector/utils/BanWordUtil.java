@@ -7,5 +7,4 @@ import java.util.List;
 public interface BanWordUtil extends WordUtil {
 
     List<WordDto> has(String word);
-
 }

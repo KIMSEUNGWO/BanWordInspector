@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class WordData {
+public class WordData {
 
     private final Map<Character, WordData> data = new HashMap<>();
 
@@ -20,12 +20,10 @@ public abstract class WordData {
 
         char c = word.charAt(idx);
 
-        if (!data.containsKey(c)) data.put(c, getInstance());
+        if (!data.containsKey(c)) data.put(c, new WordData());
         data.get(c).push(word, idx + 1);
 
     }
-
-    protected abstract WordData getInstance();
 
     protected List<WordDto> useToArray(String str) {
         List<WordDto> words = new ArrayList<>();
