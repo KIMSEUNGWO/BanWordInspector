@@ -16,7 +16,7 @@ public class BanWordInspector extends AbstractWordInspector {
     private final BanWordUtil wordUtil;
 
     @Autowired
-    public BanWordInspector(InspectConfig config, @Qualifier("banWordUtil") BanWordUtil wordUtil) {
+    public BanWordInspector(InspectConfig config, BanWordUtil wordUtil) {
         super(config);
         this.wordUtil = wordUtil;
     }

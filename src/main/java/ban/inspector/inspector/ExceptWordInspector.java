@@ -16,7 +16,7 @@ public class ExceptWordInspector extends AbstractWordInspector {
     private final ExceptWordUtil wordUtil;
 
     @Autowired
-    public ExceptWordInspector(InspectConfig config, @Qualifier("exceptWordUtil") ExceptWordUtil wordUtil) {
+    public ExceptWordInspector(InspectConfig config, ExceptWordUtil wordUtil) {
         super(config);
         this.wordUtil = wordUtil;
     }

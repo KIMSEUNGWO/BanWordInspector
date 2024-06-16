@@ -1,8 +1,11 @@
 package ban.inspector.utils;
 
-import org.springframework.stereotype.Component;
 
-@Component
-public class ExceptWordUtilImpl extends AbstractExceptWordUtil {
 
+public class ExceptWordUtilImpl extends WordUtilImpl implements ExceptWordUtil {
+
+    @Override
+    public WordUtil getInstance() {
+        return new ExceptWordUtilImpl();
+    }
 }
