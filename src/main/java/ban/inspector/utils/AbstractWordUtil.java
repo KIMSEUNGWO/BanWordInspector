@@ -20,11 +20,11 @@ public abstract class AbstractWordUtil implements WordUtil {
 
 
     @Override
-    public String find(String str, int idx) {
-        if (data.isEmpty()) return "";
-        if (str.length() <= idx || !data.containsKey(str.charAt(idx))) return null;
-        String next = data.get(str.charAt(idx)).find(str, idx + 1);
-        return (next != null) ? str.charAt(idx) + next : null;
+    public int find(String str, int idx) {
+        if (data.isEmpty()) return 0;
+        if (str.length() <= idx || !data.containsKey(str.charAt(idx))) return -1;
+        int next = data.get(str.charAt(idx)).find(str, idx + 1);
+        return (next == -1) ? -1 : 1 + next;
     }
 
 }

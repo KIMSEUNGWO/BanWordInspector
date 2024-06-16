@@ -5,7 +5,7 @@ public interface WordUtil {
         push(word, 0);
     }
     void push(String word, int index);
-    String find(String str, int idx);
+    int find(String str, int idx);
     WordUtil getInstance();
 
 }

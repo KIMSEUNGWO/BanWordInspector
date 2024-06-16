@@ -18,7 +18,7 @@ class BanWordUtilTest {
 
     @BeforeAll
     public static void setUp() {
-        List<String> banWords = List.of("졸라", "어미", "애미", "니애미");
+        List<String> banWords = List.of("졸라", "어미", "애미", "니애미", "여러자테스트임");
         banWords.forEach(banWordUtil::addWord);
     }
 
@@ -94,7 +94,7 @@ class BanWordUtilTest {
     @DisplayName("(1) 금지어가 다수일 경우 금지어목록을 반환한다.")
     public void 다수의_금지어_테스트1() {
         // given
-        String word = "졸라졸라졸라";
+        String word = "졸라졸라졸라여러자테스트임";
         String newWord = removeNotKorean(word);
 
         // when
@@ -102,12 +102,13 @@ class BanWordUtilTest {
 
         // then
         assertThat(banList)
-            .hasSize(3)
+            .hasSize(4)
             .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
             .containsExactly(
                 tuple("졸라", 0, 2),
                 tuple("졸라", 2, 4),
-                tuple("졸라", 4, 6)
+                tuple("졸라", 4, 6),
+                tuple("여러자테스트임", 6, 13)
             );
 
     }

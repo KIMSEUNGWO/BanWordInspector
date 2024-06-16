@@ -13,11 +13,11 @@ public interface ExceptWordUtil extends WordUtil {
     private List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords) {
         StringBuilder sb = new StringBuilder(newWord);
         for (int i = 0; i < beforeWords.get(beforeWords.size()-1).getEndIndex(); i++) {
-            String txt = find(sb.toString(), i);
-            if (txt != null) {
-                int endIndex = i + txt.length();
-                sb.replace(i, endIndex, "x".repeat(txt.length()));
-                i += txt.length() - 1;
+            int txt = find(sb.toString(), i);
+            if (txt != -1) {
+                int endIndex = i + txt;
+                sb.replace(i, endIndex, "x".repeat(txt));
+                i += txt - 1;
             }
         }
         return beforeWords.stream()
