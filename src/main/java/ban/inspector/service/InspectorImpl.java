@@ -9,23 +9,22 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import static ban.inspector.config.Constant.SUCCESS;
 
 @Service
 @RequiredArgsConstructor
-public class BanWordServiceImpl implements BanWordService {
+public class InspectorImpl implements Inspector {
 
     private final BanWordInspector banInspector;
     private final ExceptWordInspector exceptInspector;
 
     @Override
-    public Optional<Response> valid(String word) {
+    public Response valid(String word) {
         String newWord = removeNotKorean(word);
         List<WordDto> badWords = banInspector.inspect(newWord);
         List<String> badWords2 = exceptInspector.inspect(newWord, badWords);
-        return (!badWords2.isEmpty()) ?
-            Optional.of(new BanWordListResponse(badWords2)) :
-            Optional.empty();
+        return (badWords2.isEmpty()) ? new Response(SUCCESS) : new BanWordListResponse(badWords2);
     }
 
     private String removeNotKorean(String word) {

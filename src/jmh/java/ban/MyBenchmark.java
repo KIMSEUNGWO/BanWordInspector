@@ -1,19 +1,10 @@
 package ban;
 
-import ban.inspector.service.BanWordService;
-import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Test;
+import ban.inspector.service.Inspector;
 import org.openjdk.jmh.annotations.*;
-import org.openjdk.jmh.infra.Blackhole;
-import org.openjdk.jmh.runner.Runner;
-import org.openjdk.jmh.runner.options.Options;
-import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -33,12 +24,12 @@ public class MyBenchmark {
         .web(WebApplicationType.NONE)
         .build().run();
 
-    private BanWordService banWordService;
+    private Inspector banWordService;
     private String word = "고르곤졸라피자 졸라맛있다.";
 
     @Setup(Level.Trial)
     public void setup(){
-        banWordService = context.getBean("banWordService", BanWordService.class);
+        banWordService = context.getBean("banWordService", Inspector.class);
     }
 
 

@@ -3,7 +3,7 @@ package ban.inspector.service;
 import ban.inspector.dto.Response;
 
 import java.util.Optional;
-public interface BanWordService {
+public interface Inspector {
 
-    Optional<Response> valid(String word);
+    Response valid(String word);
 }

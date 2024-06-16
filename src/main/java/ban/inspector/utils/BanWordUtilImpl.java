@@ -1,7 +1,7 @@
 package ban.inspector.utils;
 
 
-public class BanWordUtilImpl extends WordUtilImpl implements BanWordUtil {
+public class BanWordUtilImpl extends AbstractWordUtil implements BanWordUtil {
 
     @Override
     public WordUtil getInstance() {

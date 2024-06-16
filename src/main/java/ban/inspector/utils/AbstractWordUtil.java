@@ -4,7 +4,7 @@ package ban.inspector.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class WordUtilImpl implements WordUtil {
+public abstract class AbstractWordUtil implements WordUtil {
 
     private final Map<Character, WordUtil> data = new HashMap<>();
 

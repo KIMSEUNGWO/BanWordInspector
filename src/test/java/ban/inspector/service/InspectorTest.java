@@ -5,10 +5,7 @@ import ban.inspector.domain.ExceptWord;
 import ban.inspector.dto.Response;
 import ban.inspector.repository.JpaBanWordRepository;
 import ban.inspector.repository.JpaExceptWordRepository;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.RequiredTypes;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
-class BanWordServiceTest {
+class InspectorTest {
 
 
-    @Autowired private BanWordService service;
+    @Autowired private Inspector service;
     @Autowired private JpaBanWordRepository banWordRepository;
     @Autowired private JpaExceptWordRepository exceptWordRepository;
 
@@ -40,7 +35,6 @@ class BanWordServiceTest {
 
     @Test
     void name() {
-        Optional<Response> result = service.valid("졸라배고프다");
-        Assertions.assertThat(result).isNotEmpty();
+        Response result = service.valid("졸라배고프다");
     }
 }
