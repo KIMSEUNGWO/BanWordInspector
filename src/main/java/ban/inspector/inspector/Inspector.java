@@ -1,8 +1,10 @@
 package ban.inspector.inspector;
 
+import ban.inspector.dto.Word;
+
 import java.util.List;
 
 public interface Inspector {
 
-    List<String> inspect(String word);
+    List<Word> inspect(String word);
 }

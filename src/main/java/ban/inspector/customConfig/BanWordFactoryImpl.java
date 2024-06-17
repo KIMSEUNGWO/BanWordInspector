@@ -16,7 +16,6 @@ public class BanWordFactoryImpl implements BanWordFactory {
         return new BanWordFactoryBuilder(this, banWordUtil);
     }
 
-    @Override
     public List<BanWordUtil> getUtils() {
         return builders;
     }

@@ -1,5 +1,6 @@
 package ban.inspector.service;
 
+import ban.inspector.dto.Word;
 import ban.inspector.inspector.Inspector;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -48,7 +49,7 @@ class InspectorTest {
     void 금지어가_존재하지않으면_빈_리스트를_반환한다(String word) {
 
         // when
-        List<String> response = inspector.inspect(word);
+        List<Word> response = inspector.inspect(word);
 
         // then
         assertThat(response).isEmpty();

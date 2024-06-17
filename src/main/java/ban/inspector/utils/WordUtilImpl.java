@@ -8,7 +8,7 @@ import java.util.Map;
 @Component
 public class WordUtilImpl implements WordUtil {
 
-    private final Map<Character, WordUtil> data = new HashMap<>();
+    private final Map<Character, WordUtilImpl> data = new HashMap<>();
 
     @Override
     public void push(String word, int index) {
@@ -22,11 +22,22 @@ public class WordUtilImpl implements WordUtil {
 
 
     @Override
-    public int find(String str, int index) {
-        if (data.isEmpty()) return 0;
-        if (str.length() <= index || !data.containsKey(str.charAt(index))) return -1;
-        int next = data.get(str.charAt(index)).find(str, index + 1);
-        return (next == -1) ? -1 : 1 + next;
+    public int find(String str, int index, int deep, boolean ignoreSpace) {
+        WordUtilImpl wordUtil = this;
+        while (true) {
+            if (wordUtil.data.isEmpty()) return deep;
+            if (str.length() <= index) return -1;
+
+            if (ignoreSpace && str.charAt(index) == ' ') {
+                if (deep == 0) return -1;
+                index++;    deep++;
+                continue;
+            }
+
+            if (!wordUtil.data.containsKey(str.charAt(index))) return -1;
+            wordUtil = wordUtil.data.get(str.charAt(index));
+            index++;    deep++;
+        }
     }
 
 }

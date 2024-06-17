@@ -16,7 +16,6 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
         return new ExceptWordFactoryBuilder(this, exceptWordUtil);
     }
 
-    @Override
     public List<ExceptWordUtil> getUtils() {
         return builders;
     }

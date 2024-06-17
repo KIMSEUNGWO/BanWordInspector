@@ -2,6 +2,7 @@ package ban.inspector.controller;
 
 import ban.inspector.dto.BanWordListResponse;
 import ban.inspector.dto.Response;
+import ban.inspector.dto.Word;
 import ban.inspector.inspector.Inspector;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class BanWordController {
 
     @GetMapping("/valid")
     public ResponseEntity<Response> valid(@RequestParam(name = "word") String word) {
-        List<String> result = inspector.inspect(word);
+        List<String> result = inspector.inspect(word).stream().map(Word::getWord).toList();
         Response response = (result.isEmpty()) ? new Response(SUCCESS) : new BanWordListResponse(result);
         return ResponseEntity.ok(response);
     }

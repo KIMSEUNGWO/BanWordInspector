@@ -1,8 +1,6 @@
 package ban.inspector.customConfig.innerConfig;
 
-import ban.inspector.customConfig.BanWordFactory;
-import ban.inspector.customConfig.ExceptWordFactory;
-import ban.inspector.customConfig.InspectConfig;
+import ban.inspector.customConfig.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -13,8 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InnerInspectConfig {
 
-    @Getter private final BanWordFactory banWordFactory;
-    @Getter private final ExceptWordFactory exceptFactory;
+    @Getter private final BanWordFactoryImpl banWordFactory;
+    @Getter private final ExceptWordFactoryImpl exceptFactory;
     private final InspectConfig inspectConfig;
 
     @EventListener(ApplicationReadyEvent.class)
