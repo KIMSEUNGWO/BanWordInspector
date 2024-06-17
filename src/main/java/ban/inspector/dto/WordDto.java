@@ -2,8 +2,10 @@ package ban.inspector.dto;
 
 import lombok.Getter;
 
+import java.util.Comparator;
+
 @Getter
-public class WordDto {
+public class WordDto implements Comparable<WordDto> {
 
     private final String word;
     private final int startIndex;
@@ -27,5 +29,12 @@ public class WordDto {
 
     public boolean includeRange(int start, int end) {
         return start <= startIndex && end >= endIndex;
+    }
+
+    @Override
+    public int compareTo(WordDto o) {
+        if (startIndex - o.startIndex != 0 ) return startIndex - o.startIndex;
+        if (endIndex - o.endIndex != 0) return endIndex - o.endIndex;
+        return word.compareTo(o.word);
     }
 }

@@ -1,10 +1,12 @@
 package ban.inspector.utils;
 
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractWordUtil implements WordUtil {
+@Component
+public class WordUtilImpl implements WordUtil {
 
     private final Map<Character, WordUtil> data = new HashMap<>();
 
@@ -14,7 +16,7 @@ public abstract class AbstractWordUtil implements WordUtil {
 
         char c = word.charAt(index);
 
-        if (!data.containsKey(c)) data.put(c, getInstance());
+        if (!data.containsKey(c)) data.put(c, new WordUtilImpl());
         data.get(c).push(word, index + 1);
     }
 
