@@ -1,6 +1,6 @@
 package ban;
 
-import ban.inspector.service.Inspector;
+import ban.inspector.inspector.Inspector;
 import org.openjdk.jmh.annotations.*;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,18 +24,18 @@ public class MyBenchmark {
         .web(WebApplicationType.NONE)
         .build().run();
 
-    private Inspector banWordService;
+    private Inspector inspector;
     private String word = "고르곤졸라피자 졸라맛있다.";
 
     @Setup(Level.Trial)
     public void setup(){
-        banWordService = context.getBean("banWordService", Inspector.class);
+        inspector = context.getBean("banWordService", Inspector.class);
     }
 
 
     @Benchmark
     public void testMethod() {
-        banWordService.valid(word);
+        inspector.inspect(word);
     }
 
 }

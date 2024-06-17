@@ -1,6 +1,6 @@
 package ban.inspector.utils;
 
-import ban.inspector.dto.WordDto;
+import ban.inspector.dto.Word;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -28,11 +28,11 @@ class ExceptWordUtilTest {
         String word = "고르곤졸라가 맛있어요";
         String newWord = removeNotKorean(word);
 
-        List<WordDto> banWords = new ArrayList<>();
-        banWords.add(new WordDto("졸라", 3));
+        List<Word> banWords = new ArrayList<>();
+        banWords.add(new Word("졸라", 3));
 
         // when
-        List<WordDto> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
 
         // then
         Assertions.assertThat(filter).hasSize(0);
@@ -45,12 +45,12 @@ class ExceptWordUtilTest {
         String word = "고르곤졸라가 졸라맛있어요";
         String newWord = removeNotKorean(word);
 
-        List<WordDto> banWords = new ArrayList<>();
-        banWords.add(new WordDto("졸라", 3));
-        banWords.add(new WordDto("졸라", 6));
+        List<Word> banWords = new ArrayList<>();
+        banWords.add(new Word("졸라", 3));
+        banWords.add(new Word("졸라", 6));
 
         // when
-        List<WordDto> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
 
         // then
         Assertions.assertThat(filter).hasSize(1);
@@ -63,10 +63,10 @@ class ExceptWordUtilTest {
         String word = "";
         String newWord = removeNotKorean(word);
 
-        List<WordDto> banWords = List.of();
+        List<Word> banWords = List.of();
 
         // when
-        List<WordDto> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
 
         // then
         Assertions.assertThat(filter).hasSize(0);

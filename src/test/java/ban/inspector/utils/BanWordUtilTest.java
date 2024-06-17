@@ -1,6 +1,6 @@
 package ban.inspector.utils;
 
-import ban.inspector.dto.WordDto;
+import ban.inspector.dto.Word;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ class BanWordUtilTest {
         "졸!@#ㄴㅇㄹㅈ3ㄱ23ㄱ라", "애애애애애애애애애애애애애애미", "졸       라", "     졸   123ㅁㅉㄴㅏㅑㅕㅏ123!@#&* 라", "졸라안녕하세요"})
     void 금지어인_단어(String word) {
         String newWord = removeNotKorean(word);
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
         assertThat(banList).hasSize(1);
     }
 
@@ -37,7 +37,7 @@ class BanWordUtilTest {
     @ValueSource(strings = {"", " ", "졸누라", "123123", "미애", "어어무미미", "안녕하세요", "조오오옹ㄹ라"})
     void 금지어가_아닌_단어(String word) {
         String newWord = removeNotKorean(word);
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
         assertThat(banList).isEmpty();
     }
 
@@ -48,12 +48,12 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList).hasSize(1);
         assertThat(banList.get(0))
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly("졸라", 0, 2);
 
     }
@@ -64,12 +64,12 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList).hasSize(1);
         assertThat(banList.get(0))
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly("애미", 5, 7);
 
     }
@@ -81,11 +81,11 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList.get(0))
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly("졸라", 0, 2);
 
     }
@@ -97,11 +97,11 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList.get(0))
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly("졸라", 0, 2);
 
     }
@@ -114,12 +114,12 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList)
             .hasSize(4)
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly(
                 tuple("졸라", 0, 2),
                 tuple("졸라", 2, 4),
@@ -136,12 +136,12 @@ class BanWordUtilTest {
         String newWord = removeNotKorean(word);
 
         // when
-        List<WordDto> banList = banWordUtil.has(newWord);
+        List<Word> banList = banWordUtil.filter(newWord);
 
         // then
         assertThat(banList)
             .hasSize(2)
-            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly(
                 tuple("졸라", 0, 2),
                 tuple("어미", 7, 9)

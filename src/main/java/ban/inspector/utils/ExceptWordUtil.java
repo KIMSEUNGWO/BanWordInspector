@@ -1,50 +1,41 @@
 package ban.inspector.utils;
 
-import ban.inspector.dto.WordDto;
+import ban.inspector.dto.Word;
 
 import java.util.List;
 
-public interface ExceptWordUtil extends WordUtil {
+public abstract class ExceptWordUtil extends WordUtilImpl implements WordUtilSettings {
 
-    default List<WordDto> filter(String newWord, List<WordDto> beforeWords) {
+    public final List<Word> filter(String newWord, List<Word> beforeWords) {
         return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
     }
 
-    private List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords) {
+    private List<Word> expectFilter(String newWord, List<Word> beforeWords) {
+        int startIndex = Math.max(beforeWords.get(0).getStartIndex() - 5, 0);
         int lastIndex = beforeWords.get(beforeWords.size() - 1).getEndIndex();
-        for (int i = 0; i < lastIndex; i++) {
-            int txt = find(newWord, i);
-            if (txt != -1) {
-                remove(i, i + txt, beforeWords);
-                i += txt - 1;
+        for (int i = startIndex; i < lastIndex; i++) {
+            int idx = find(newWord, i, 0, setIgnoreSpace());
+            if (idx != -1) {
+                remove(i, i + idx, beforeWords);
+                i += idx - 1;
             }
         }
         return beforeWords;
     }
 
-    private void remove(int startIndex, int endIndex, List<WordDto> beforeWords) {
+    private void remove(int startIndex, int endIndex, List<Word> beforeWords) {
         for (int i = 0; i < beforeWords.size(); i++) {
-            WordDto wordDto = beforeWords.get(i);
-            if (wordDto.includeRange(startIndex, endIndex)) {
+            Word word = beforeWords.get(i);
+            if (word.includeRange(startIndex, endIndex)) {
                 beforeWords.remove(i);
                 return;
             }
-            if (wordDto.getStartIndex() >= endIndex) return;
+            if (word.getStartIndex() >= endIndex) return;
         }
     }
-//    private List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords) {
-//        StringBuilder sb = new StringBuilder(newWord);
-//        for (int i = 0; i < beforeWords.get(beforeWords.size()-1).getEndIndex(); i++) {
-//            int txt = find(sb.toString(), i);
-//            if (txt != -1) {
-//                int endIndex = i + txt;
-//                sb.replace(i, endIndex, "|".repeat(txt));
-//                i += txt - 1;
-//            }
-//        }
-//        return beforeWords.stream()
-//                .filter(wordDto -> wordDto.isSame(sb))
-//                .toList();
-//    }
 
+    @Override
+    public boolean setIgnoreSpace() {
+        return false;
+    }
 }

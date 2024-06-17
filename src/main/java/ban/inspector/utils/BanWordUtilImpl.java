@@ -1,10 +1,12 @@
 package ban.inspector.utils;
 
 
-public class BanWordUtilImpl extends AbstractWordUtil implements BanWordUtil {
+public class BanWordUtilImpl extends BanWordUtil {
+
 
     @Override
-    public WordUtil getInstance() {
-        return new BanWordUtilImpl();
+    protected String setWordForm(String word) {
+//        return word.replaceAll("[^가-힣]", "");
+        return word;
     }
 }
