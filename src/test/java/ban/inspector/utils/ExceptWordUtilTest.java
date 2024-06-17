@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static ban.inspector.RemoveNotKorean.*;
@@ -27,7 +28,8 @@ class ExceptWordUtilTest {
         String word = "고르곤졸라가 맛있어요";
         String newWord = removeNotKorean(word);
 
-        List<WordDto> banWords = List.of(new WordDto("졸라", 3));
+        List<WordDto> banWords = new ArrayList<>();
+        banWords.add(new WordDto("졸라", 3));
 
         // when
         List<WordDto> filter = exceptWordUtil.filter(newWord, banWords);
@@ -43,10 +45,9 @@ class ExceptWordUtilTest {
         String word = "고르곤졸라가 졸라맛있어요";
         String newWord = removeNotKorean(word);
 
-        List<WordDto> banWords = List.of(
-            new WordDto("졸라", 3),
-            new WordDto("졸라", 6)
-        );
+        List<WordDto> banWords = new ArrayList<>();
+        banWords.add(new WordDto("졸라", 3));
+        banWords.add(new WordDto("졸라", 6));
 
         // when
         List<WordDto> filter = exceptWordUtil.filter(newWord, banWords);

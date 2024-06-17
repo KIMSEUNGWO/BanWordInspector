@@ -89,6 +89,22 @@ class BanWordUtilTest {
             .containsExactly("졸라", 0, 2);
 
     }
+    @Test
+    @DisplayName("(2) 금지어를 검색할때 완전한 한글을 제외하고 인덱스를 계산한다.")
+    public void 금지어_인덱스_테스트3() {
+        // given
+        String word = "졸라배고프다";
+        String newWord = removeNotKorean(word);
+
+        // when
+        List<WordDto> banList = banWordUtil.has(newWord);
+
+        // then
+        assertThat(banList.get(0))
+            .extracting(WordDto::getWord, WordDto::getStartIndex, WordDto::getEndIndex)
+            .containsExactly("졸라", 0, 2);
+
+    }
 
     @Test
     @DisplayName("(1) 금지어가 다수일 경우 금지어목록을 반환한다.")

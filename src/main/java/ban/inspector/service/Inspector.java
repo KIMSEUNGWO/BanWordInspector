@@ -1,9 +1,8 @@
 package ban.inspector.service;
 
-import ban.inspector.dto.Response;
+import java.util.List;
 
-import java.util.Optional;
 public interface Inspector {
 
-    Response valid(String word);
+    List<String> valid(String word);
 }

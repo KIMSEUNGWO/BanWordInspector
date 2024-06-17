@@ -5,7 +5,6 @@ import ban.inspector.dto.WordDto;
 import ban.inspector.utils.BanWordUtil;
 import ban.inspector.utils.WordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

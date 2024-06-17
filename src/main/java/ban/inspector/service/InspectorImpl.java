@@ -20,11 +20,10 @@ public class InspectorImpl implements Inspector {
     private final ExceptWordInspector exceptInspector;
 
     @Override
-    public Response valid(String word) {
+    public List<String> valid(String word) {
         String newWord = removeNotKorean(word);
         List<WordDto> badWords = banInspector.inspect(newWord);
-        List<String> badWords2 = exceptInspector.inspect(newWord, badWords);
-        return (badWords2.isEmpty()) ? new Response(SUCCESS) : new BanWordListResponse(badWords2);
+        return exceptInspector.inspect(newWord, badWords);
     }
 
     private String removeNotKorean(String word) {

@@ -24,4 +24,8 @@ public class WordDto {
     public String toString() {
         return String.format("word = %s, startIndex = %d, endIndex = %d", word, startIndex, endIndex);
     }
+
+    public boolean includeRange(int start, int end) {
+        return start <= startIndex && end >= endIndex;
+    }
 }

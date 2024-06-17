@@ -5,10 +5,12 @@ import ban.inspector.utils.WordUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @RequiredArgsConstructor
+@Component
 public abstract class AbstractWordInspector {
 
     private final InspectConfig config;
