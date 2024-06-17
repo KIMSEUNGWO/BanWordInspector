@@ -6,6 +6,10 @@ import java.util.List;
 
 public abstract class ExceptWordUtil extends WordUtilImpl {
 
-    abstract public List<WordDto> filter(String newWord, List<WordDto> beforeWords);
+    public final List<WordDto> filter(String newWord, List<WordDto> beforeWords) {
+        return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
+    }
+
+    abstract public List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords);
 
 }

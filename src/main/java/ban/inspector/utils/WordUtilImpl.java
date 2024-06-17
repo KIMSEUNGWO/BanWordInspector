@@ -22,10 +22,10 @@ public class WordUtilImpl implements WordUtil {
 
 
     @Override
-    public int find(String str, int idx) {
+    public int find(String str, int index) {
         if (data.isEmpty()) return 0;
-        if (str.length() <= idx || !data.containsKey(str.charAt(idx))) return -1;
-        int next = data.get(str.charAt(idx)).find(str, idx + 1);
+        if (str.length() <= index || !data.containsKey(str.charAt(index))) return -1;
+        int next = data.get(str.charAt(index)).find(str, index + 1);
         return (next == -1) ? -1 : 1 + next;
     }
 

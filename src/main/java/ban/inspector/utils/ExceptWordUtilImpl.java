@@ -7,12 +7,9 @@ import java.util.List;
 
 public class ExceptWordUtilImpl extends ExceptWordUtil {
 
-    @Override
-    public List<WordDto> filter(String newWord, List<WordDto> beforeWords) {
-        return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
-    }
 
-    private List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords) {
+    @Override
+    public List<WordDto> expectFilter(String newWord, List<WordDto> beforeWords) {
         int lastIndex = beforeWords.get(beforeWords.size() - 1).getEndIndex();
         for (int i = 0; i < lastIndex; i++) {
             int txt = find(newWord, i);
@@ -34,5 +31,4 @@ public class ExceptWordUtilImpl extends ExceptWordUtil {
             if (wordDto.getStartIndex() >= endIndex) return;
         }
     }
-
 }

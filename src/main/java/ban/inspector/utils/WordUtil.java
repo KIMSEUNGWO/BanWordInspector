@@ -6,6 +6,6 @@ public interface WordUtil {
 
     void push(String word, int index);
 
-    int find(String str, int idx);
+    int find(String str, int index);
 
 }
