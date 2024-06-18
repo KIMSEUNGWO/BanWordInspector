@@ -25,7 +25,7 @@ public class WordUtilImpl implements WordUtil {
     public int find(String str, int index, int deep, boolean ignoreSpace) {
         WordUtilImpl wordUtil = this;
         while (true) {
-            if (wordUtil.data.isEmpty()) return deep;
+            if (wordUtil.data.isEmpty()) return deep == 0 ? -1 : deep;
             if (str.length() <= index) return -1;
 
             if (ignoreSpace && str.charAt(index) == ' ') {

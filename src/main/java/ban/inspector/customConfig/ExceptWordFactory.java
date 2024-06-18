@@ -6,6 +6,6 @@ import ban.inspector.utils.ExceptWordUtil;
 
 public interface ExceptWordFactory extends Iterable<ExceptWordUtil> {
 
-    ExceptWordFactoryImpl.ExceptWordFactoryBuilder add(ExceptWordUtil exceptWordUtil);
+    WordFactoryBuilder add(ExceptWordUtil exceptWordUtil);
 
 }

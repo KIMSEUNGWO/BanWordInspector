@@ -13,16 +13,8 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
     private final List<ExceptWordUtil> builders = new ArrayList<>();
 
     @Override
-    public ExceptWordFactoryBuilder add(ExceptWordUtil exceptWordUtil) {
+    public WordFactoryBuilder add(ExceptWordUtil exceptWordUtil) {
         return new ExceptWordFactoryBuilder(this, exceptWordUtil);
-    }
-
-    public List<ExceptWordUtil> getUtils() {
-        return builders;
-    }
-
-    private void build(ExceptWordUtil exceptWordUtil) {
-        builders.add(exceptWordUtil);
     }
 
     @Override
@@ -30,7 +22,7 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
         return builders.iterator();
     }
 
-    public static class ExceptWordFactoryBuilder {
+    public static class ExceptWordFactoryBuilder implements WordFactoryBuilder {
 
         private final ExceptWordFactoryImpl factory;
         private final ExceptWordUtil wordUtil;
@@ -40,13 +32,15 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
             this.wordUtil = wordUtil;
         }
 
-        public ExceptWordFactoryBuilder initWords(InitWords words) {
+        @Override
+        public WordFactoryBuilder initWords(InitWords words) {
             words.initWords().forEach(wordUtil::addWord);
             return this;
         }
 
+        @Override
         public void build() {
-            factory.build(wordUtil);
+            factory.builders.add(wordUtil);
         }
     }
 }

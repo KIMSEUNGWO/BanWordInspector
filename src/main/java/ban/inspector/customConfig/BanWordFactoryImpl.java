@@ -13,16 +13,8 @@ public class BanWordFactoryImpl implements BanWordFactory {
     private final List<BanWordUtil> builders = new ArrayList<>();
 
     @Override
-    public BanWordFactoryBuilder add(BanWordUtil banWordUtil) {
+    public WordFactoryBuilder add(BanWordUtil banWordUtil) {
         return new BanWordFactoryBuilder(this, banWordUtil);
-    }
-
-    public List<BanWordUtil> getUtils() {
-        return builders;
-    }
-
-    private void build(BanWordUtil banWordUtil) {
-        builders.add(banWordUtil);
     }
 
     @Override
@@ -30,7 +22,7 @@ public class BanWordFactoryImpl implements BanWordFactory {
         return builders.iterator();
     }
 
-    public static class BanWordFactoryBuilder {
+    public static class BanWordFactoryBuilder implements WordFactoryBuilder {
 
         private final BanWordFactoryImpl factory;
         private final BanWordUtil wordUtil;
@@ -41,13 +33,15 @@ public class BanWordFactoryImpl implements BanWordFactory {
             this.wordUtil = wordUtil;
         }
 
-        public BanWordFactoryBuilder initWords(InitWords words) {
+        @Override
+        public WordFactoryBuilder initWords(InitWords words) {
             words.initWords().forEach(wordUtil::addWord);
             return this;
         }
 
+        @Override
         public void build() {
-            factory.build(wordUtil);
+            factory.builders.add(wordUtil);
         }
     }
 }
