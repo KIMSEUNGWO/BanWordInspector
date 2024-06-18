@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InnerInspectConfig {
 
-    @Getter private final BanWordFactoryImpl banWordFactory;
-    @Getter private final ExceptWordFactoryImpl exceptFactory;
+    @Getter private final BanWordFactory banWordFactory;
+    @Getter private final ExceptWordFactory exceptFactory;
     private final InspectConfig inspectConfig;
 
     @EventListener(ApplicationReadyEvent.class)

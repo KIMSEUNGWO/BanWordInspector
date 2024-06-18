@@ -4,12 +4,13 @@ import ban.inspector.utils.BanWordUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
 public class BanWordFactoryImpl implements BanWordFactory {
 
-    private List<BanWordUtil> builders = new ArrayList<>();
+    private final List<BanWordUtil> builders = new ArrayList<>();
 
     @Override
     public BanWordFactoryBuilder add(BanWordUtil banWordUtil) {
@@ -22,6 +23,11 @@ public class BanWordFactoryImpl implements BanWordFactory {
 
     private void build(BanWordUtil banWordUtil) {
         builders.add(banWordUtil);
+    }
+
+    @Override
+    public Iterator<BanWordUtil> iterator() {
+        return builders.iterator();
     }
 
     public static class BanWordFactoryBuilder {

@@ -4,12 +4,13 @@ import ban.inspector.utils.ExceptWordUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
 public class ExceptWordFactoryImpl implements ExceptWordFactory {
 
-    private List<ExceptWordUtil> builders = new ArrayList<>();
+    private final List<ExceptWordUtil> builders = new ArrayList<>();
 
     @Override
     public ExceptWordFactoryBuilder add(ExceptWordUtil exceptWordUtil) {
@@ -22,6 +23,11 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
 
     private void build(ExceptWordUtil exceptWordUtil) {
         builders.add(exceptWordUtil);
+    }
+
+    @Override
+    public Iterator<ExceptWordUtil> iterator() {
+        return builders.iterator();
     }
 
     public static class ExceptWordFactoryBuilder {
