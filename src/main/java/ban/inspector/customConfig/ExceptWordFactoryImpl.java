@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class ExceptWordFactoryImpl implements WordFactory, ExceptWordFactory {
+public class ExceptWordFactoryImpl implements ExceptWordFactory {
 
     private final ExceptWordUtil exceptWordUtil;
     private final List<String> builders = new ArrayList<>();
@@ -23,9 +23,8 @@ public class ExceptWordFactoryImpl implements WordFactory, ExceptWordFactory {
     }
 
     @Override
-    public WordFactory build() {
+    public void build() {
         builders.forEach(exceptWordUtil::addWord);
-        return this;
     }
 
     @Override

@@ -2,7 +2,6 @@ package ban.inspector.customConfig;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.BanWordUtil;
-import ban.inspector.utils.WordUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +9,7 @@ import java.util.*;
 
 @Component
 @RequiredArgsConstructor
-public class BanWordFactoryImpl implements WordFactory, BanWordFactory {
+public class BanWordFactoryImpl implements BanWordFactory {
 
     private final BanWordUtil banWordUtil;
     private final Set<String> builders = new TreeSet<>();
@@ -22,9 +21,8 @@ public class BanWordFactoryImpl implements WordFactory, BanWordFactory {
     }
 
     @Override
-    public WordFactory build() {
+    public void build() {
         builders.forEach(banWordUtil::addWord);
-        return this;
     }
 
     @Override
