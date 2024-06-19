@@ -1,9 +1,10 @@
 package ban.inspector.customConfig;
 
-import ban.inspector.utils.BanWordUtil;
+import ban.inspector.dto.Word;
 
-public interface BanWordFactory extends Iterable<BanWordUtil> {
+import java.util.List;
 
-    WordFactoryBuilder add(BanWordUtil banWordUtil);
+public interface BanWordFactory {
 
+    List<Word> filter(String word);
 }

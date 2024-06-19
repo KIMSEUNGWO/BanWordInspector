@@ -1,47 +1,34 @@
 package ban.inspector.customConfig;
 
+import ban.inspector.dto.Word;
 import ban.inspector.utils.BanWordUtil;
+import ban.inspector.utils.WordUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Component
-public class BanWordFactoryImpl implements BanWordFactory {
+@RequiredArgsConstructor
+public class BanWordFactoryImpl implements WordFactory, BanWordFactory {
 
-    private final List<BanWordUtil> builders = new ArrayList<>();
+    private final BanWordUtil banWordUtil;
+    private final Set<String> builders = new TreeSet<>();
 
     @Override
-    public WordFactoryBuilder add(BanWordUtil banWordUtil) {
-        return new BanWordFactoryBuilder(this, banWordUtil);
+    public WordFactory add(List<String> words) {
+        builders.addAll(words);
+        return this;
     }
 
     @Override
-    public Iterator<BanWordUtil> iterator() {
-        return builders.iterator();
+    public WordFactory build() {
+        builders.forEach(banWordUtil::addWord);
+        return this;
     }
 
-    public static class BanWordFactoryBuilder implements WordFactoryBuilder {
-
-        private final BanWordFactoryImpl factory;
-        private final BanWordUtil wordUtil;
-
-
-        public BanWordFactoryBuilder(BanWordFactoryImpl factory, BanWordUtil wordUtil) {
-            this.factory = factory;
-            this.wordUtil = wordUtil;
-        }
-
-        @Override
-        public WordFactoryBuilder initWords(InitWords words) {
-            words.initWords().forEach(wordUtil::addWord);
-            return this;
-        }
-
-        @Override
-        public void build() {
-            factory.builders.add(wordUtil);
-        }
+    @Override
+    public List<Word> filter(String word) {
+        return banWordUtil.filter(word);
     }
 }

@@ -24,6 +24,13 @@ public abstract class ExceptWordUtil extends WordUtilImpl implements WordUtilSet
     }
 
     private void remove(int startIndex, int endIndex, List<Word> beforeWords) {
+//        for (Word word : beforeWords) {
+//            if (word.includeRange(startIndex, endIndex)) {
+//                beforeWords.remove(word);
+//                return;
+//            }
+//            if (word.getStartIndex() >= endIndex) return;
+//        }
         for (int i = 0; i < beforeWords.size(); i++) {
             Word word = beforeWords.get(i);
             if (word.includeRange(startIndex, endIndex)) {
