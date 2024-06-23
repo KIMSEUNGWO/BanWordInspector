@@ -2,18 +2,20 @@ package ban.inspector.customConfig;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.ExceptWordUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 public class ExceptWordFactoryImpl implements ExceptWordFactory {
 
     private final ExceptWordUtil exceptWordUtil;
     private final List<String> builders = new ArrayList<>();
+
+    public ExceptWordFactoryImpl(ExceptWordUtil exceptWordUtil) {
+        this.exceptWordUtil = exceptWordUtil;
+    }
 
     @Override
     public WordFactory add(List<String> words) {

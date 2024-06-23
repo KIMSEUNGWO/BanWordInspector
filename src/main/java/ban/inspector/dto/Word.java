@@ -1,8 +1,5 @@
 package ban.inspector.dto;
 
-import lombok.Getter;
-
-@Getter
 public class Word implements Comparable<Word> {
 
     private final String word;
@@ -26,8 +23,20 @@ public class Word implements Comparable<Word> {
 
     @Override
     public int compareTo(Word o) {
-        if (startIndex - o.startIndex != 0 ) return startIndex - o.startIndex;
+        if (startIndex - o.startIndex != 0) return startIndex - o.startIndex;
         if (endIndex - o.endIndex != 0) return endIndex - o.endIndex;
         return word.compareTo(o.word);
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public int getEndIndex() {
+        return endIndex;
     }
 }
