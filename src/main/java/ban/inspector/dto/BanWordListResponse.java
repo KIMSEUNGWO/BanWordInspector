@@ -1,14 +1,9 @@
 package ban.inspector.dto;
 
-import lombok.Getter;
-import lombok.ToString;
-
 import java.util.Collection;
 
 import static ban.inspector.config.Constant.*;
 
-@Getter
-@ToString
 public class BanWordListResponse extends Response  {
 
     private final Collection<String> words;
@@ -16,5 +11,9 @@ public class BanWordListResponse extends Response  {
     public BanWordListResponse(Collection<String> words) {
         super(FAIL);
         this.words = words;
+    }
+
+    public Collection<String> getWords() {
+        return words;
     }
 }

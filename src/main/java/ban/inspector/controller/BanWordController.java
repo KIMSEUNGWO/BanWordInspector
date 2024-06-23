@@ -4,7 +4,7 @@ import ban.inspector.dto.BanWordListResponse;
 import ban.inspector.dto.Response;
 import ban.inspector.dto.Word;
 import ban.inspector.inspector.Inspector;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +15,14 @@ import java.util.List;
 import static ban.inspector.config.Constant.SUCCESS;
 
 @RestController
-@RequiredArgsConstructor
 public class BanWordController {
 
     private final Inspector inspector;
+
+    @Autowired
+    public BanWordController(Inspector inspector) {
+        this.inspector = inspector;
+    }
 
     @GetMapping("/valid")
     public ResponseEntity<Response> valid(@RequestParam(name = "word") String word) {

@@ -2,17 +2,21 @@ package ban.inspector.customConfig;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.BanWordUtil;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Component
-@RequiredArgsConstructor
 public class BanWordFactoryImpl implements BanWordFactory {
 
     private final BanWordUtil banWordUtil;
     private final Set<String> builders = new TreeSet<>();
+
+    @Autowired
+    public BanWordFactoryImpl(BanWordUtil banWordUtil) {
+        this.banWordUtil = banWordUtil;
+    }
 
     @Override
     public WordFactory add(List<String> words) {

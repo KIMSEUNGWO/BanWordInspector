@@ -36,7 +36,8 @@ class InspectorTest {
 
         WordUpdater wordUpdater = new WordUpdaterImpl();
 
-        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, inspectConfig, wordUpdater);
+        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordUpdater);
+        config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();
 
