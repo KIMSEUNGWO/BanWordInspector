@@ -1,10 +1,9 @@
 package ban.inspector.customConfig.innerConfig;
 
 import ban.inspector.customConfig.*;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,12 +12,19 @@ public class InnerInspectConfig {
 
     @Getter private final BanWordFactory banWordFactory;
     @Getter private final ExceptWordFactory exceptWordFactory;
-    private final InspectConfig inspectConfig;
+    private InspectConfig inspectConfig;
+    private final WordUpdater wordUpdater;
 
-    @EventListener(ApplicationReadyEvent.class)
+    @PostConstruct
     private void onApplicationReady() {
-        inspectConfig.addBanWords(banWordFactory);
-        inspectConfig.addExceptWords(exceptWordFactory);
+        if (inspectConfig != null) {
+            inspectConfig.addBanWords(banWordFactory);
+            inspectConfig.addExceptWords(exceptWordFactory);
+        }
+
+        wordUpdater.update();
+        banWordFactory.add(wordUpdater.getDefaultBanWords());
+        exceptWordFactory.add(wordUpdater.getDefaultExceptWords());
 
         banWordFactory.build();
         exceptWordFactory.build();
