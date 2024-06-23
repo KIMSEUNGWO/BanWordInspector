@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ public class WordUpdaterImpl implements WordUpdater {
 
     private static final Log logger = LogFactory.getLog(WordUpdater.class);
 
+
     @Override
     public void update() {
         logger.info("Checking for Word Updates");
@@ -24,8 +25,10 @@ public class WordUpdaterImpl implements WordUpdater {
     @Override
     public List<String> getDefaultBanWords() {
         try {
-            return new ObjectMapper().readValue(new File("src/main/resources/static/BanWords.json"), new TypeReference<>() {});
+            ClassPathResource resource = new ClassPathResource("static/BanWords.json");
+            return new ObjectMapper().readValue(resource.getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
+            logger.error(e);
             return new ArrayList<>();
         }
     }
@@ -33,8 +36,10 @@ public class WordUpdaterImpl implements WordUpdater {
     @Override
     public List<String> getDefaultExceptWords() {
         try {
-            return new ObjectMapper().readValue(new File("src/main/resources/static/ExceptWords.json"), new TypeReference<>() {});
+            ClassPathResource resource = new ClassPathResource("static/ExceptWords.json");
+            return new ObjectMapper().readValue(resource.getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
+            logger.error(e);
             return new ArrayList<>();
         }
     }
