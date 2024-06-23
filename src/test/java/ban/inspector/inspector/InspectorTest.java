@@ -1,19 +1,18 @@
 package ban.inspector.inspector;
 
-import ban.inspector.customConfig.*;
-import ban.inspector.customConfig.innerConfig.InnerInspectConfig;
-import ban.inspector.customConfig.innerConfig.WordUpdater;
-import ban.inspector.customConfig.innerConfig.WordUpdaterImpl;
+import ban.inspector.config.InspectConfig;
+import ban.inspector.config.InnerInspectConfig;
+import ban.inspector.updater.WordUpdater;
+import ban.inspector.updater.WordUpdaterImpl;
 import ban.inspector.dto.Word;
-import ban.inspector.utils.BanWordUtil;
-import ban.inspector.utils.BanWordUtilImpl;
-import ban.inspector.utils.ExceptWordUtil;
-import ban.inspector.utils.ExceptWordUtilImpl;
+import ban.inspector.factory.*;
+import ban.inspector.utils.wordutils.BanWordUtil;
+import ban.inspector.utils.wordutils.BanWordUtilImpl;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
+import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 

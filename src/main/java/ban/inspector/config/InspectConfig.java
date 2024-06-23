@@ -1,4 +1,6 @@
-package ban.inspector.customConfig;
+package ban.inspector.config;
+
+import ban.inspector.factory.WordFactory;
 
 public interface InspectConfig {
 

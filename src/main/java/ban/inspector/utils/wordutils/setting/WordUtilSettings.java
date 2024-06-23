@@ -1,4 +1,4 @@
-package ban.inspector.utils;
+package ban.inspector.utils.wordutils.setting;
 
 public interface WordUtilSettings {
 

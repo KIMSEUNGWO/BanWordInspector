@@ -38,6 +38,3 @@ application.properties
 
 ### VS Code ###
 .vscode/
-
-out/**
-.idea/**

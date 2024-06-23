@@ -1,4 +1,4 @@
-package ban.inspector.customConfig;
+package ban.inspector.factory;
 
 
 import java.util.List;

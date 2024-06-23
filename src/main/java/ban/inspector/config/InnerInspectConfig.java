@@ -1,6 +1,8 @@
-package ban.inspector.customConfig.innerConfig;
+package ban.inspector.config;
 
-import ban.inspector.customConfig.*;
+import ban.inspector.factory.BanWordFactory;
+import ban.inspector.factory.ExceptWordFactory;
+import ban.inspector.updater.WordUpdater;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,14 +14,6 @@ public class InnerInspectConfig {
     private final ExceptWordFactory exceptWordFactory;
     private InspectConfig inspectConfig;
     private final WordUpdater wordUpdater;
-
-    public BanWordFactory getBanWordFactory() {
-        return banWordFactory;
-    }
-
-    public ExceptWordFactory getExceptWordFactory() {
-        return exceptWordFactory;
-    }
 
     @Autowired
     public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordUpdater wordUpdater) {
@@ -46,6 +40,14 @@ public class InnerInspectConfig {
 
         banWordFactory.build();
         exceptWordFactory.build();
+    }
+
+    public BanWordFactory getBanWordFactory() {
+        return banWordFactory;
+    }
+
+    public ExceptWordFactory getExceptWordFactory() {
+        return exceptWordFactory;
     }
 
 }

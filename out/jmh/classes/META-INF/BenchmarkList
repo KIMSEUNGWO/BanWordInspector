@@ -1,1 +1,0 @@
-JMH S 15 ban.MyBenchmark S 48 ban.jmh_generated.MyBenchmark_testMethod_jmhTest S 10 testMethod S 11 AverageTime E A 1 1 1 E E E E E E E I 1 1 E E L 2 6 -Xms4G 6 -Xmx4G E E E U 12 MILLISECONDS E E 

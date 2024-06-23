@@ -1,7 +1,7 @@
-package ban.inspector.customConfig;
+package ban.inspector.factory;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.BanWordUtil;
+import ban.inspector.utils.wordutils.BanWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

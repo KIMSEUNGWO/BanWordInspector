@@ -1,4 +1,4 @@
-package ban.inspector.utils;
+package ban.inspector.utils.wordutils;
 
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,8 @@
-package ban.inspector.utils;
+package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
+import ban.inspector.utils.WordUtilImpl;
+import ban.inspector.utils.wordutils.setting.WordUtilSettings;
 
 import java.util.ArrayList;
 import java.util.List;

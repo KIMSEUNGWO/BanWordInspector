@@ -1,4 +1,4 @@
-package ban.inspector.customConfig.innerConfig;
+package ban.inspector.updater;
 
 import java.util.List;
 

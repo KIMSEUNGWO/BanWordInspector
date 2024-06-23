@@ -1,8 +1,8 @@
 package ban.inspector.inspector;
 
-import ban.inspector.customConfig.BanWordFactory;
-import ban.inspector.customConfig.ExceptWordFactory;
-import ban.inspector.customConfig.innerConfig.InnerInspectConfig;
+import ban.inspector.factory.BanWordFactory;
+import ban.inspector.factory.ExceptWordFactory;
+import ban.inspector.config.InnerInspectConfig;
 import ban.inspector.dto.Word;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

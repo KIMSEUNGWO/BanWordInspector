@@ -1,7 +1,7 @@
-package ban.inspector.customConfig;
+package ban.inspector.factory;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.ExceptWordUtil;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
