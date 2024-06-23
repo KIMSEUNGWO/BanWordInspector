@@ -2,6 +2,6 @@ package ban.inspector.customConfig;
 
 public interface InspectConfig {
 
-    void addBanWords(WordFactory factory);
-    void addExceptWords(WordFactory factory);
+    default void addBanWords(WordFactory factory) {}
+    default void addExceptWords(WordFactory factory) {}
 }
