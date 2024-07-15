@@ -2,9 +2,8 @@ package ban.inspector.updater;
 
 import java.util.List;
 
-public interface WordUpdater {
+public interface WordChecker {
 
     List<String> getDefaultBanWords();
     List<String> getDefaultExceptWords();
-
 }

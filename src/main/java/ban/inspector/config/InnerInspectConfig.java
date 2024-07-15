@@ -2,7 +2,7 @@ package ban.inspector.config;
 
 import ban.inspector.factory.BanWordFactory;
 import ban.inspector.factory.ExceptWordFactory;
-import ban.inspector.updater.WordUpdater;
+import ban.inspector.updater.WordChecker;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,13 +13,13 @@ public class InnerInspectConfig {
     private final BanWordFactory banWordFactory;
     private final ExceptWordFactory exceptWordFactory;
     private InspectConfig inspectConfig;
-    private final WordUpdater wordUpdater;
+    private final WordChecker wordChecker;
 
     @Autowired
-    public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordUpdater wordUpdater) {
+    public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordChecker wordChecker) {
         this.banWordFactory = banWordFactory;
         this.exceptWordFactory = exceptWordFactory;
-        this.wordUpdater = wordUpdater;
+        this.wordChecker = wordChecker;
     }
 
     @Autowired(required = false)
@@ -34,9 +34,8 @@ public class InnerInspectConfig {
             inspectConfig.addExceptWords(exceptWordFactory);
         }
 
-        wordUpdater.update();
-        banWordFactory.add(wordUpdater.getDefaultBanWords());
-        exceptWordFactory.add(wordUpdater.getDefaultExceptWords());
+        banWordFactory.add(wordChecker.getDefaultBanWords());
+        exceptWordFactory.add(wordChecker.getDefaultExceptWords());
 
         banWordFactory.build();
         exceptWordFactory.build();

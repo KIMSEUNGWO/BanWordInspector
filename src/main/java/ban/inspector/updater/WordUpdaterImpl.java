@@ -8,26 +8,23 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ban.inspector.updater.WordType.*;
+
 
 @Component
 public class WordUpdaterImpl implements WordUpdater {
 
-    private static final Log logger = LogFactory.getLog(WordUpdater.class);
-
-
-    @Override
-    public void update() {
-        logger.info("Checking for Word Updates");
-    }
+    private final Log logger = LogFactory.getLog(WordUpdater.class);
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public List<String> getDefaultBanWords() {
-        try {
-            ClassPathResource resource = new ClassPathResource("static/BanWords.json");
-            return new ObjectMapper().readValue(resource.getInputStream(), new TypeReference<>() {});
-        } catch (IOException e) {
+        try { return mapper.readValue(getClassPathResource(BAN.getLocalWords()).getInputStream(), new TypeReference<>() {});}
+        catch (IOException e) {
             logger.error(e);
             return new ArrayList<>();
         }
@@ -35,14 +32,23 @@ public class WordUpdaterImpl implements WordUpdater {
 
     @Override
     public List<String> getDefaultExceptWords() {
-        try {
-            ClassPathResource resource = new ClassPathResource("static/ExceptWords.json");
-            return new ObjectMapper().readValue(resource.getInputStream(), new TypeReference<>() {});
-        } catch (IOException e) {
+        try { return mapper.readValue(getClassPathResource(EXCEPT.getLocalWords()).getInputStream(), new TypeReference<>() {});}
+        catch (IOException e) {
             logger.error(e);
             return new ArrayList<>();
         }
     }
 
-    public record UpdateInfo(String version, List<String> words) { }
+    private ClassPathResource getClassPathResource(String classPath) {
+        return new ClassPathResource(classPath);
+    }
+
+
+    public static class UpdateInfo {
+        private String version;
+
+        public void setVersion(String version) {
+            this.version = version;
+        }
+    }
 }

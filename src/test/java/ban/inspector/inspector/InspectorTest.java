@@ -2,10 +2,12 @@ package ban.inspector.inspector;
 
 import ban.inspector.config.InspectConfig;
 import ban.inspector.config.InnerInspectConfig;
-import ban.inspector.updater.WordUpdater;
-import ban.inspector.updater.WordUpdaterImpl;
+import ban.inspector.updater.WordChecker;
+import ban.inspector.updater.WordCheckerImpl;
 import ban.inspector.dto.Word;
 import ban.inspector.factory.*;
+import ban.inspector.updater.WordUpdater;
+import ban.inspector.updater.WordUpdaterImpl;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.BanWordUtilImpl;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
@@ -34,8 +36,9 @@ class InspectorTest {
         inspectConfig.addExceptWords(exceptFac);
 
         WordUpdater wordUpdater = new WordUpdaterImpl();
+        WordChecker wordChecker = new WordCheckerImpl(wordUpdater);
 
-        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordUpdater);
+        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordChecker);
         config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();
