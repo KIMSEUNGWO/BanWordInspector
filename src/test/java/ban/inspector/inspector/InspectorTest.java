@@ -9,9 +9,7 @@ import ban.inspector.factory.*;
 import ban.inspector.updater.WordUpdater;
 import ban.inspector.updater.WordUpdaterImpl;
 import ban.inspector.utils.wordutils.BanWordUtil;
-import ban.inspector.utils.wordutils.BanWordUtilImpl;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
-import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -26,8 +24,8 @@ class InspectorTest {
     private Inspector inspector;
 
     public InspectorTest() {
-        BanWordUtil banWordUtil = new BanWordUtilImpl();
-        ExceptWordUtil exceptWordUtil = new ExceptWordUtilImpl();
+        BanWordUtil banWordUtil = new BanWordUtil();
+        ExceptWordUtil exceptWordUtil = new ExceptWordUtil();
         BanWordFactory banFac = new BanWordFactoryImpl(banWordUtil);
         ExceptWordFactory exceptFac = new ExceptWordFactoryImpl(exceptWordUtil);
 
@@ -42,6 +40,7 @@ class InspectorTest {
         config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();
+
 
         this.inspector = new InspectorImpl(config);
     }

@@ -2,7 +2,6 @@ package ban.inspector.utils;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.wordutils.BanWordUtil;
-import ban.inspector.utils.wordutils.BanWordUtilImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,12 +15,13 @@ import static org.assertj.core.api.Assertions.*;
 
 class BanWordUtilTest {
 
-    private static final BanWordUtil banWordUtil = new BanWordUtilImpl();
+    private static final BanWordUtil banWordUtil = new BanWordUtil();
 
     @BeforeAll
     public static void setUp() {
         List<String> banWords = List.of("졸라", "어미", "애미", "니애미", "여러자테스트임");
         banWords.forEach(banWordUtil::addWord);
+        banWordUtil.build();
     }
 
 

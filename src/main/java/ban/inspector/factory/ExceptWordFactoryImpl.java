@@ -20,13 +20,13 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
     @Override
     public WordFactory add(List<String> words) {
         builders.addAll(words);
-        builders.forEach(exceptWordUtil::addWord);
         return this;
     }
 
     @Override
     public void build() {
         builders.forEach(exceptWordUtil::addWord);
+        exceptWordUtil.build();
     }
 
     @Override

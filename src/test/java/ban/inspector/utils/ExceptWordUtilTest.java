@@ -2,7 +2,6 @@ package ban.inspector.utils;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
-import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -15,12 +14,13 @@ import static ban.inspector.RemoveNotKorean.*;
 
 class ExceptWordUtilTest {
 
-    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtilImpl();
+    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil();
 
     @BeforeAll
     public static void setUp() {
         List<String> exceptWords = List.of("고르곤졸라", "어미새");
         exceptWords.forEach(exceptWordUtil::addWord);
+        exceptWordUtil.build();
     }
 
     @Test

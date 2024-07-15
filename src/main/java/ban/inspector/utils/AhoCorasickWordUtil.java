@@ -1,8 +1,12 @@
 package ban.inspector.utils;
 
+import ban.inspector.dto.Word;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
-public class AhoCorasickWordUtil {
+@Component
+public class AhoCorasickWordUtil implements WordUtil2 {
 
     static class TrieNode {
         Map<Character, TrieNode> children = new HashMap<>();
@@ -18,6 +22,7 @@ public class AhoCorasickWordUtil {
         this.root = new TrieNode();
     }
 
+    @Override
     public void addWord(String word) {
         TrieNode node = root;
         for (char c : word.toCharArray()) {
@@ -26,7 +31,8 @@ public class AhoCorasickWordUtil {
         node.output.add(word);
     }
 
-    public void buildFailureLinks() {
+    @Override
+    public void build() {
         Queue<TrieNode> queue = new LinkedList<>();
         root.failureLink = root;
 
@@ -59,8 +65,10 @@ public class AhoCorasickWordUtil {
         }
     }
 
-    public Map<String, List<Integer>> search(String word) {
-        Map<String, List<Integer>> results = new HashMap<>();
+    @Override
+    public List<Word> search(String word) {
+        List<Word> result = new ArrayList<>();
+
         TrieNode node = root;
 
         for (int i = 0; i < word.length(); i++) {
@@ -75,11 +83,11 @@ public class AhoCorasickWordUtil {
             }
 
             for (String pattern : node.output) {
-                results.computeIfAbsent(pattern, k -> new ArrayList<>()).add(i - pattern.length() + 1);
+                result.add(new Word(pattern, i - pattern.length() + 1));
             }
         }
 
-        return results;
+        return result;
     }
 
 

@@ -1,41 +1,27 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.WordUtilImpl;
-import ban.inspector.utils.wordutils.setting.WordUtilSettings;
+import ban.inspector.utils.AhoCorasickWordUtil;
+import ban.inspector.utils.WordUtil2;
+import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BanWordUtil extends WordUtilImpl implements WordUtilSettings {
+@Component
+public class BanWordUtil {
+
+    private final WordUtil2 wordUtil2 = new AhoCorasickWordUtil();
 
     public final List<Word> filter(String word) {
-        String newWord = setWordForm(word);
-        return useToArray(newWord);
+        return wordUtil2.search(word);
     }
 
-    protected abstract String setWordForm(String word);
-
-    @Override
-    public boolean setIgnoreSpace() {
-        return true;
+    public void addWord(String word) {
+        wordUtil2.addWord(word);
     }
 
-    private List<Word> useToArray(String word) {
-        List<Word> words = new ArrayList<>();
-        int count = 0;
-        for (int i = 0; i < word.length(); i++) {
-            int txt = find(word, i, 0, setIgnoreSpace());
-            if (txt != -1) {
-                words.add(new Word(word.substring(i, i + txt), i));
-                i += txt - 1;
-            }
-            if (count++ >= word.length()) {
-                System.out.println("BanWordUtil.useToArray : StackOverflow");
-                return new ArrayList<>();
-            }
-        }
-        return words;
-    }
 
+    public void build() {
+        wordUtil2.build();
+    }
 }

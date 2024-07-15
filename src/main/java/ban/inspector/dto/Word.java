@@ -17,8 +17,11 @@ public class Word implements Comparable<Word> {
         return String.format("word = %s, startIndex = %d, endIndex = %d", word, startIndex, endIndex);
     }
 
-    public boolean includeRange(int start, int end) {
+    public boolean isIncludeRange(int start, int end) {
         return start <= startIndex && end >= endIndex;
+    }
+    public boolean isInclude(Word word) {
+        return word.startIndex <= startIndex && word.endIndex >= endIndex;
     }
 
     @Override

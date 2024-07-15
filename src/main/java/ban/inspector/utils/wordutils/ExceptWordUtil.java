@@ -1,42 +1,43 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.WordUtilImpl;
-import ban.inspector.utils.wordutils.setting.WordUtilSettings;
+import ban.inspector.utils.AhoCorasickWordUtil;
+import ban.inspector.utils.WordUtil2;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ExceptWordUtil extends WordUtilImpl implements WordUtilSettings {
+@Component
+public class ExceptWordUtil {
+
+    private final WordUtil2 wordUtil2 = new AhoCorasickWordUtil();
 
     public final List<Word> filter(String newWord, List<Word> beforeWords) {
         return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
     }
 
     private List<Word> expectFilter(String newWord, List<Word> beforeWords) {
-        int startIndex = Math.max(beforeWords.get(0).getStartIndex() - 5, 0);
-        int lastIndex = beforeWords.get(beforeWords.size() - 1).getEndIndex();
-        for (int i = startIndex; i < lastIndex; i++) {
-            int idx = find(newWord, i, 0, setIgnoreSpace());
-            if (idx != -1) {
-                remove(i, i + idx, beforeWords);
-                i += idx - 1;
+        List<Word> exceptWords = wordUtil2.search(newWord);
+
+        if (exceptWords.isEmpty()) return beforeWords;
+
+        List<Word> newWords = new ArrayList<>();
+
+        a:for (Word banWord : beforeWords) {
+            for (Word exceptWord : exceptWords) {
+                if (banWord.isInclude(exceptWord)) continue a;
             }
+            newWords.add(banWord);
         }
-        return beforeWords;
+        return newWords;
     }
 
-    private void remove(int startIndex, int endIndex, List<Word> beforeWords) {
-        for (Word word : beforeWords) {
-            if (word.includeRange(startIndex, endIndex)) {
-                beforeWords.remove(word);
-                return;
-            }
-            if (word.getStartIndex() >= endIndex) return;
-        }
+    public void addWord(String word) {
+        wordUtil2.addWord(word);
     }
 
-    @Override
-    public boolean setIgnoreSpace() {
-        return false;
+    public void build() {
+        wordUtil2.build();
     }
 }
