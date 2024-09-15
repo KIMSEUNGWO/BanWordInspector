@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class AhoCorasickWordUtil implements WordUtil2 {
+public class AhoCorasickWordUtil implements WordUtil {
 
     static class TrieNode {
         Map<Character, TrieNode> children = new HashMap<>();
@@ -25,8 +25,8 @@ public class AhoCorasickWordUtil implements WordUtil2 {
     @Override
     public void addWord(String word) {
         TrieNode node = root;
-        for (char c : word.toCharArray()) {
-            node = node.children.computeIfAbsent(c, k -> new TrieNode());
+        for (int i = 0; i < word.length(); i++) {
+            node = node.children.computeIfAbsent(word.charAt(i), k -> new TrieNode());
         }
         node.output.add(word);
     }
@@ -99,8 +99,7 @@ public class AhoCorasickWordUtil implements WordUtil2 {
 
             // 출력 리스트에 포함된 패턴들을 결과 리스트에 추가
             for (String pattern : node.output) {
-                int patternLength = pattern.length();
-                int start = startIndices.getOrDefault(nonSpaceIndex - (patternLength - 1), -1);
+                int start = startIndices.getOrDefault(nonSpaceIndex - (pattern.length() - 1), -1);
                 int end = realIndex + 1;
 
                 if (start != -1) {
@@ -112,7 +111,6 @@ public class AhoCorasickWordUtil implements WordUtil2 {
             realIndex++;
         }
 
-        System.out.println("result = " + result);
         return result;
     }
 

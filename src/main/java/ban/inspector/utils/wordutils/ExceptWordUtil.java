@@ -2,7 +2,7 @@ package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
 import ban.inspector.utils.AhoCorasickWordUtil;
-import ban.inspector.utils.WordUtil2;
+import ban.inspector.utils.WordUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ import java.util.List;
 @Component
 public class ExceptWordUtil {
 
-    private final WordUtil2 wordUtil2 = new AhoCorasickWordUtil();
+    private final WordUtil wordUtil = new AhoCorasickWordUtil();
 
     public final List<Word> filter(String newWord, List<Word> beforeWords) {
         return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
     }
 
     private List<Word> expectFilter(String newWord, List<Word> beforeWords) {
-        List<Word> exceptWords = wordUtil2.search(newWord);
+        List<Word> exceptWords = wordUtil.search(newWord);
 
         if (exceptWords.isEmpty()) return beforeWords;
 
@@ -34,10 +34,10 @@ public class ExceptWordUtil {
     }
 
     public void addWord(String word) {
-        wordUtil2.addWord(word);
+        wordUtil.addWord(word);
     }
 
     public void build() {
-        wordUtil2.build();
+        wordUtil.build();
     }
 }

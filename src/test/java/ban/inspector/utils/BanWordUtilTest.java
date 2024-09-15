@@ -50,7 +50,7 @@ class BanWordUtilTest {
         // then
         assertThat(banList).hasSize(1);
         assertThat(banList.get(0))
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly("졸라", 0, 2);
 
     }
@@ -65,7 +65,7 @@ class BanWordUtilTest {
         // then
         assertThat(banList).hasSize(1);
         assertThat(banList.get(0))
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly("애미", 5, 7);
 
     }
@@ -81,7 +81,7 @@ class BanWordUtilTest {
 
         // then
         assertThat(banList.get(0))
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly("졸라", 0, 5);
 
     }
@@ -98,7 +98,7 @@ class BanWordUtilTest {
         // then
         assertThat(banList)
             .hasSize(4)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("졸라", 0, 2),
                 tuple("졸라", 2, 4),
@@ -119,7 +119,7 @@ class BanWordUtilTest {
         // then
         assertThat(banList)
             .hasSize(2)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("졸라", 0, 3),
                 tuple("어미", 9, 11)

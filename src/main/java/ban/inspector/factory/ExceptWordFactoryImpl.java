@@ -1,6 +1,5 @@
 package ban.inspector.factory;
 
-import ban.inspector.dto.Word;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +29,4 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
         return exceptWordUtil;
     }
 
-    @Override
-    public List<Word> filter(String word, List<Word> banWords) {
-        return exceptWordUtil.filter(word, banWords);
-    }
 }

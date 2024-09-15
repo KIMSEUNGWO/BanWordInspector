@@ -118,7 +118,7 @@ class InspectorTest {
         // then
         assertThat(response)
             .isNotEmpty()
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("사과", 0, 3),
                 tuple("바나나", 3, 7),
@@ -138,7 +138,7 @@ class InspectorTest {
         // then
         assertThat(response)
             .hasSize(2)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("사과", 0, 5),
                 tuple("수박", 7, 9)
@@ -157,7 +157,7 @@ class InspectorTest {
         // then
         assertThat(response)
             .hasSize(1)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("수박", 11, 13)
             );
@@ -188,7 +188,7 @@ class InspectorTest {
         // then
         assertThat(response)
             .hasSize(1)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .extracting(Word::word, Word::startIndex, Word::endIndex)
             .containsExactly(
                 tuple("멜론", 0, 2)
             );

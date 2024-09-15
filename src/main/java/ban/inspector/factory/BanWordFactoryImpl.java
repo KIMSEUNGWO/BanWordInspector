@@ -1,6 +1,5 @@
 package ban.inspector.factory;
 
-import ban.inspector.dto.Word;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,7 @@ import java.util.*;
 public class BanWordFactoryImpl implements BanWordFactory {
 
     private final BanWordUtil banWordUtil;
-    private final Set<String> builders = new TreeSet<>();
+    private final Set<String> builders = new HashSet<>();
 
     @Autowired
     public BanWordFactoryImpl(BanWordUtil banWordUtil) {
@@ -31,8 +30,4 @@ public class BanWordFactoryImpl implements BanWordFactory {
         return banWordUtil;
     }
 
-    @Override
-    public List<Word> filter(String word) {
-        return banWordUtil.filter(word);
-    }
 }
