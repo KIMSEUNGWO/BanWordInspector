@@ -1,7 +1,7 @@
 package ban.inspector.utils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.wordutils.BanWordUtilImpl;
+import ban.inspector.utils.wordutils.BanWordUtil;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class BanWordUtilTest {
 
-    private static final BanWordUtilImpl banWordUtil = new BanWordUtilImpl(new AhoCorasickWordUtil());
+    private static final BanWordUtil banWordUtil = new BanWordUtil(new AhoCorasickWordUtil());
 
     @BeforeAll
     public static void setUp() {

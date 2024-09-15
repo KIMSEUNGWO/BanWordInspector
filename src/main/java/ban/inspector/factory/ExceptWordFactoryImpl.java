@@ -1,6 +1,6 @@
 package ban.inspector.factory;
 
-import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ExceptWordFactoryImpl implements WordFactoryBuilder<ExceptWordUtilImpl> {
+public class ExceptWordFactoryImpl implements WordFactoryBuilder<ExceptWordUtil> {
 
-    private final ExceptWordUtilImpl exceptWordUtil;
+    private final ExceptWordUtil exceptWordUtil;
     private final Set<String> builders = new HashSet<>();
 
-    public ExceptWordFactoryImpl(ExceptWordUtilImpl exceptWordUtil) {
+    public ExceptWordFactoryImpl(ExceptWordUtil exceptWordUtil) {
         this.exceptWordUtil = exceptWordUtil;
     }
 
@@ -24,7 +24,7 @@ public class ExceptWordFactoryImpl implements WordFactoryBuilder<ExceptWordUtilI
     }
 
     @Override
-    public ExceptWordUtilImpl build() {
+    public ExceptWordUtil build() {
         builders.forEach(exceptWordUtil::addWord);
         exceptWordUtil.build();
         return exceptWordUtil;

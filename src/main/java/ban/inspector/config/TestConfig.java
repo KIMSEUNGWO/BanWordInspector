@@ -10,9 +10,9 @@ public class TestConfig implements InspectConfig {
 
     @Override
     public void addBanWords(WordFactory factory) {
-        factory.add(List.of(
-            "감자", "고구마"
-        ));
+        factory
+            .add(List.of("감자", "고구마"))
+            .add(List.of("오이"));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package ban.inspector.utils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +12,7 @@ import java.util.List;
 
 class ExceptWordUtilTest {
 
-    private static final ExceptWordUtilImpl exceptWordUtil = new ExceptWordUtilImpl(new AhoCorasickWordUtil());
+    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil(new AhoCorasickWordUtil());
 
     @BeforeAll
     public static void setUp() {
