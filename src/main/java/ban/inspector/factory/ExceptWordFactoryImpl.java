@@ -26,6 +26,7 @@ public class ExceptWordFactoryImpl implements WordFactoryBuilder<ExceptWordUtil>
     @Override
     public ExceptWordUtil build() {
         builders.forEach(exceptWordUtil::addWord);
+        builders.clear();
         exceptWordUtil.build();
         return exceptWordUtil;
     }

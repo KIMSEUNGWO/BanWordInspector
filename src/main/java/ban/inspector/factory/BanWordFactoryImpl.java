@@ -26,6 +26,7 @@ public class BanWordFactoryImpl implements WordFactoryBuilder<BanWordUtil> {
     @Override
     public BanWordUtil build() {
         builders.forEach(banWordUtil::addWord);
+        builders.clear();
         banWordUtil.build();
         return banWordUtil;
     }

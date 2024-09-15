@@ -8,13 +8,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class WordLoaderImpl implements WordLoader {
 
-    private final ObjectMapper mapper = new ObjectMapper();
     private final Log logger = LogFactory.getLog(WordLoaderImpl.class);
 
     @Override
@@ -29,10 +28,10 @@ public class WordLoaderImpl implements WordLoader {
 
     private List<String> read(String path) {
         try {
-            return mapper.readValue(new ClassPathResource(path).getInputStream(), new TypeReference<>() {});
+            return new ObjectMapper().readValue(new ClassPathResource(path).getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
             logger.error(e);
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
     }
 

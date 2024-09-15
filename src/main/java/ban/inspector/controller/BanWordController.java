@@ -30,5 +30,9 @@ public class BanWordController {
         Response response = (result.isEmpty()) ? new Response(SUCCESS) : new BanWordListResponse(result);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/mask")
+    public ResponseEntity<String> mask(@RequestParam(name = "word") String word) {
+        return ResponseEntity.ok(inspector.mask(word));
+    }
 
 }

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class InspectorTest {
 
-    private Inspector inspector;
+    private final Inspector inspector;
 
     public InspectorTest() {
         BanWordUtil banWordUtil = new BanWordUtil(new AhoCorasickWordUtil());

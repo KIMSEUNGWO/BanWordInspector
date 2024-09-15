@@ -15,8 +15,8 @@ public class ExceptWordUtil extends AbstractWordUtil {
         super(wordUtil);
     }
 
-    public final List<Word> filter(String newWord, List<Word> beforeWords) {
-        return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);
+    public final List<Word> filter(String newWord, List<Word> banWords) {
+        return (banWords.isEmpty()) ? List.of() : expectFilter(newWord, banWords);
     }
 
     private List<Word> expectFilter(String newWord, List<Word> beforeWords) {

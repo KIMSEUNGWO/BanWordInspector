@@ -1,6 +1,8 @@
 package ban.inspector.factory;
 
-public interface WordFactoryBuilder<T> extends WordFactory {
+import ban.inspector.utils.wordutils.AbstractWordUtil;
+
+public interface WordFactoryBuilder<T extends AbstractWordUtil> extends WordFactory {
 
     T build();
 

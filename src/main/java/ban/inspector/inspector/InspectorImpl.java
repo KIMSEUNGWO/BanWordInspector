@@ -17,6 +17,7 @@ public class InspectorImpl implements Inspector {
 
     @Autowired
     public InspectorImpl(InnerInspectConfig config) {
+        System.out.println("InspectorImpl.InspectorImpl");
         banWordUtil = config.getBanWordUtil();
         exceptWordUtil = config.getExceptWordUtil();
     }
