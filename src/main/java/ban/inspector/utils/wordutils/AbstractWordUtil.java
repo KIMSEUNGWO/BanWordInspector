@@ -1,4 +1,6 @@
-package ban.inspector.utils;
+package ban.inspector.utils.wordutils;
+
+import ban.inspector.utils.WordUtil;
 
 public abstract class AbstractWordUtil<T extends AbstractWordUtil<T>> {
 

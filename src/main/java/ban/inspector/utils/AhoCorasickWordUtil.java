@@ -114,8 +114,4 @@ public class AhoCorasickWordUtil implements WordUtil {
         return result;
     }
 
-
-
-
-
 }

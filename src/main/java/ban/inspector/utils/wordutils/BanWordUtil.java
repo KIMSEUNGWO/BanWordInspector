@@ -1,7 +1,6 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.AbstractWordUtil;
 import ban.inspector.utils.WordUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
