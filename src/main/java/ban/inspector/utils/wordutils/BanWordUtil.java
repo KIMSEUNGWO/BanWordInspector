@@ -1,6 +1,7 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
+import ban.inspector.utils.AbstractWordUtil;
 import ban.inspector.utils.WordUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -8,24 +9,18 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BanWordUtil {
-
-    private final WordUtil wordUtil;
+public class BanWordUtil extends AbstractWordUtil<BanWordUtil> {
 
     public BanWordUtil(@Qualifier("ban") WordUtil wordUtil) {
-        this.wordUtil = wordUtil;
+        super(wordUtil);
     }
 
     public final List<Word> filter(String word) {
         return wordUtil.search(word);
     }
 
-    public void addWord(String word) {
-        wordUtil.addWord(word);
-    }
-
-
-    public void build() {
-        wordUtil.build();
+    @Override
+    public BanWordUtil get() {
+        return this;
     }
 }

@@ -1,6 +1,7 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
+import ban.inspector.utils.AbstractWordUtil;
 import ban.inspector.utils.WordUtil;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -9,12 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ExceptWordUtil {
-
-    private final WordUtil wordUtil;
+public class ExceptWordUtil extends AbstractWordUtil<ExceptWordUtil> {
 
     public ExceptWordUtil(@Qualifier("except") WordUtil wordUtil) {
-        this.wordUtil = wordUtil;
+        super(wordUtil);
     }
 
     public final List<Word> filter(String newWord, List<Word> beforeWords) {
@@ -37,11 +36,8 @@ public class ExceptWordUtil {
         return newWords;
     }
 
-    public void addWord(String word) {
-        wordUtil.addWord(word);
-    }
-
-    public void build() {
-        wordUtil.build();
+    @Override
+    public ExceptWordUtil get() {
+        return this;
     }
 }
