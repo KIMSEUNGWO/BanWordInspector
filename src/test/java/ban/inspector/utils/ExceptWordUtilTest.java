@@ -12,7 +12,7 @@ import java.util.List;
 
 class ExceptWordUtilTest {
 
-    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil();
+    private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil(new AhoCorasickWordUtil());
 
     @BeforeAll
     public static void setUp() {

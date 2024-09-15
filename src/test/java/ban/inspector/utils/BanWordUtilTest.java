@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class BanWordUtilTest {
 
-    private static final BanWordUtil banWordUtil = new BanWordUtil();
+    private static final BanWordUtil banWordUtil = new BanWordUtil(new AhoCorasickWordUtil());
 
     @BeforeAll
     public static void setUp() {

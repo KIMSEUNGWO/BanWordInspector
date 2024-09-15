@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class ExceptWordFactoryImpl implements ExceptWordFactory {
+public class ExceptWordFactoryImpl implements WordFactoryBuilder<ExceptWordUtil> {
 
     private final ExceptWordUtil exceptWordUtil;
     private final Set<String> builders = new HashSet<>();

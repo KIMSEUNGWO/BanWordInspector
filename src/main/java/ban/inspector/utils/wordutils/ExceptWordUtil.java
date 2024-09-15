@@ -1,8 +1,8 @@
 package ban.inspector.utils.wordutils;
 
 import ban.inspector.dto.Word;
-import ban.inspector.utils.AhoCorasickWordUtil;
 import ban.inspector.utils.WordUtil;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,7 +11,11 @@ import java.util.List;
 @Component
 public class ExceptWordUtil {
 
-    private final WordUtil wordUtil = new AhoCorasickWordUtil();
+    private final WordUtil wordUtil;
+
+    public ExceptWordUtil(@Qualifier("except") WordUtil wordUtil) {
+        this.wordUtil = wordUtil;
+    }
 
     public final List<Word> filter(String newWord, List<Word> beforeWords) {
         return (beforeWords.isEmpty()) ? List.of() : expectFilter(newWord, beforeWords);

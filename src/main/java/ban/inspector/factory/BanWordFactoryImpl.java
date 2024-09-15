@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class BanWordFactoryImpl implements BanWordFactory {
+public class BanWordFactoryImpl implements WordFactoryBuilder<BanWordUtil> {
 
     private final BanWordUtil banWordUtil;
     private final Set<String> builders = new HashSet<>();

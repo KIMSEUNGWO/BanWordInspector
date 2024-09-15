@@ -1,7 +1,6 @@
 package ban.inspector.config;
 
-import ban.inspector.factory.BanWordFactory;
-import ban.inspector.factory.ExceptWordFactory;
+import ban.inspector.factory.WordFactoryBuilder;
 import ban.inspector.updater.WordLoader;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
@@ -12,13 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class InnerInspectConfig {
 
-    private final BanWordFactory banWordFactory;
-    private final ExceptWordFactory exceptWordFactory;
+    private final WordFactoryBuilder<BanWordUtil> banWordFactory;
+    private final WordFactoryBuilder<ExceptWordUtil> exceptWordFactory;
     private InspectConfig inspectConfig;
     private final WordLoader wordLoader;
 
     @Autowired
-    public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordLoader wordLoader) {
+    public InnerInspectConfig(WordFactoryBuilder<BanWordUtil> banWordFactory, WordFactoryBuilder<ExceptWordUtil> exceptWordFactory, WordLoader wordLoader) {
         this.banWordFactory = banWordFactory;
         this.exceptWordFactory = exceptWordFactory;
         this.wordLoader = wordLoader;

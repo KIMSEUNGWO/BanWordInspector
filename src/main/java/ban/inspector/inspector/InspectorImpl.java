@@ -12,7 +12,6 @@ import java.util.List;
 @Component
 public class InspectorImpl implements Inspector {
 
-
     private final BanWordUtil banWordUtil;
     private final ExceptWordUtil exceptWordUtil;
 
