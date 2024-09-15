@@ -17,17 +17,14 @@ public class WordLoaderImpl implements WordLoader {
     private final ObjectMapper mapper = new ObjectMapper();
     private final Log logger = LogFactory.getLog(WordLoaderImpl.class);
 
-    private final String BAN_WORD_JSON_PATH = "static/BanWords.json";
-    private final String EXCEPT_WORD_JSON_PATH = "static/ExceptWords.json";
-
     @Override
     public List<String> readBanWords() {
-        return read(BAN_WORD_JSON_PATH);
+        return read("static/BanWords.json");
     }
 
     @Override
     public List<String> readExceptWords() {
-        return read(EXCEPT_WORD_JSON_PATH);
+        return read("static/ExceptWords.json");
     }
 
     private List<String> read(String path) {

@@ -3,14 +3,15 @@ package ban.inspector.factory;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ExceptWordFactoryImpl implements ExceptWordFactory {
 
     private final ExceptWordUtil exceptWordUtil;
-    private final List<String> builders = new ArrayList<>();
+    private final Set<String> builders = new HashSet<>();
 
     public ExceptWordFactoryImpl(ExceptWordUtil exceptWordUtil) {
         this.exceptWordUtil = exceptWordUtil;
