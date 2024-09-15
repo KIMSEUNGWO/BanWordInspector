@@ -7,8 +7,8 @@ import ban.inspector.updater.WordLoaderImpl;
 import ban.inspector.dto.Word;
 import ban.inspector.factory.*;
 import ban.inspector.utils.AhoCorasickWordUtil;
-import ban.inspector.utils.wordutils.BanWordUtil;
-import ban.inspector.utils.wordutils.ExceptWordUtil;
+import ban.inspector.utils.wordutils.BanWordUtilImpl;
+import ban.inspector.utils.wordutils.ExceptWordUtilImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -23,10 +23,10 @@ class InspectorTest {
     private Inspector inspector;
 
     public InspectorTest() {
-        BanWordUtil banWordUtil = new BanWordUtil(new AhoCorasickWordUtil());
-        ExceptWordUtil exceptWordUtil = new ExceptWordUtil(new AhoCorasickWordUtil());
-        WordFactoryBuilder<BanWordUtil> banFac = new BanWordFactoryImpl(banWordUtil);
-        WordFactoryBuilder<ExceptWordUtil> exceptFac = new ExceptWordFactoryImpl(exceptWordUtil);
+        BanWordUtilImpl banWordUtil = new BanWordUtilImpl(new AhoCorasickWordUtil());
+        ExceptWordUtilImpl exceptWordUtil = new ExceptWordUtilImpl(new AhoCorasickWordUtil());
+        WordFactoryBuilder<BanWordUtilImpl> banFac = new BanWordFactoryImpl(banWordUtil);
+        WordFactoryBuilder<ExceptWordUtilImpl> exceptFac = new ExceptWordFactoryImpl(exceptWordUtil);
 
         InspectConfig inspectConfig = new TestInspectConfig();
         inspectConfig.addBanWords(banFac);
