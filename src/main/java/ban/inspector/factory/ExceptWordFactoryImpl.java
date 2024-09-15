@@ -24,9 +24,10 @@ public class ExceptWordFactoryImpl implements ExceptWordFactory {
     }
 
     @Override
-    public void build() {
+    public ExceptWordUtil build() {
         builders.forEach(exceptWordUtil::addWord);
         exceptWordUtil.build();
+        return exceptWordUtil;
     }
 
     @Override

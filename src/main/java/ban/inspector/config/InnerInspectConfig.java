@@ -2,7 +2,9 @@ package ban.inspector.config;
 
 import ban.inspector.factory.BanWordFactory;
 import ban.inspector.factory.ExceptWordFactory;
-import ban.inspector.updater.WordChecker;
+import ban.inspector.updater.WordLoader;
+import ban.inspector.utils.wordutils.BanWordUtil;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,13 +15,13 @@ public class InnerInspectConfig {
     private final BanWordFactory banWordFactory;
     private final ExceptWordFactory exceptWordFactory;
     private InspectConfig inspectConfig;
-    private final WordChecker wordChecker;
+    private final WordLoader wordLoader;
 
     @Autowired
-    public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordChecker wordChecker) {
+    public InnerInspectConfig(BanWordFactory banWordFactory, ExceptWordFactory exceptWordFactory, WordLoader wordLoader) {
         this.banWordFactory = banWordFactory;
         this.exceptWordFactory = exceptWordFactory;
-        this.wordChecker = wordChecker;
+        this.wordLoader = wordLoader;
     }
 
     @Autowired(required = false)
@@ -34,19 +36,16 @@ public class InnerInspectConfig {
             inspectConfig.addExceptWords(exceptWordFactory);
         }
 
-        banWordFactory.add(wordChecker.getDefaultBanWords());
-        exceptWordFactory.add(wordChecker.getDefaultExceptWords());
-
-        banWordFactory.build();
-        exceptWordFactory.build();
+        banWordFactory.add(wordLoader.readBanWords());
+        exceptWordFactory.add(wordLoader.readExceptWords());
     }
 
-    public BanWordFactory getBanWordFactory() {
-        return banWordFactory;
+    public BanWordUtil getBanWordUtil() {
+        return banWordFactory.build();
     }
 
-    public ExceptWordFactory getExceptWordFactory() {
-        return exceptWordFactory;
+    public ExceptWordUtil getExceptWordUtil() {
+        return exceptWordFactory.build();
     }
 
 }

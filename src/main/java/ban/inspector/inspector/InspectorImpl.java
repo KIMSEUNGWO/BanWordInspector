@@ -1,9 +1,9 @@
 package ban.inspector.inspector;
 
-import ban.inspector.factory.BanWordFactory;
-import ban.inspector.factory.ExceptWordFactory;
 import ban.inspector.config.InnerInspectConfig;
 import ban.inspector.dto.Word;
+import ban.inspector.utils.wordutils.BanWordUtil;
+import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,21 +13,21 @@ import java.util.List;
 public class InspectorImpl implements Inspector {
 
 
-    private final BanWordFactory banWordFactory;
-    private final ExceptWordFactory exceptWordFactory;
+    private final BanWordUtil banWordUtil;
+    private final ExceptWordUtil exceptWordUtil;
 
     @Autowired
     public InspectorImpl(InnerInspectConfig config) {
-        banWordFactory = config.getBanWordFactory();
-        exceptWordFactory = config.getExceptWordFactory();
+        banWordUtil = config.getBanWordUtil();
+        exceptWordUtil = config.getExceptWordUtil();
     }
 
     private List<Word> executeBanWord(String word) {
-        return banWordFactory.filter(word);
+        return banWordUtil.filter(word);
     }
 
     private List<Word> executeExceptWord(String word, List<Word> beforeWords) {
-        return exceptWordFactory.filter(word, beforeWords);
+        return exceptWordUtil.filter(word, beforeWords);
     }
 
     @Override

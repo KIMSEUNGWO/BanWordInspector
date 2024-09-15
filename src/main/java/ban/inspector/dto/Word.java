@@ -6,10 +6,10 @@ public class Word implements Comparable<Word> {
     private final int startIndex;
     private final int endIndex;
 
-    public Word(String word, int startIndex) {
+    public Word(String word, int startIndex, int endIndex) {
         this.word = word;
         this.startIndex = startIndex;
-        this.endIndex = startIndex + word.length();
+        this.endIndex = endIndex;
     }
 
     @Override

@@ -2,8 +2,8 @@ package ban.inspector.inspector;
 
 import ban.inspector.config.InspectConfig;
 import ban.inspector.config.InnerInspectConfig;
-import ban.inspector.updater.WordChecker;
-import ban.inspector.updater.WordCheckerImpl;
+import ban.inspector.updater.WordLoader;
+import ban.inspector.updater.WordLoaderImpl;
 import ban.inspector.dto.Word;
 import ban.inspector.factory.*;
 import ban.inspector.updater.WordUpdater;
@@ -34,9 +34,9 @@ class InspectorTest {
         inspectConfig.addExceptWords(exceptFac);
 
         WordUpdater wordUpdater = new WordUpdaterImpl();
-        WordChecker wordChecker = new WordCheckerImpl(wordUpdater);
+        WordLoader wordLoader = new WordLoaderImpl();
 
-        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordChecker);
+        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordLoader);
         config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();
@@ -120,9 +120,28 @@ class InspectorTest {
             .isNotEmpty()
             .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly(
-                tuple("사 과", 0, 3),
-                tuple("바 나나", 3, 7),
+                tuple("사과", 0, 3),
+                tuple("바나나", 3, 7),
                 tuple("수박", 9, 11)
+            );
+
+    }
+
+    @Test
+    void 금지어가_포함되면_리스트로_반환된다2() {
+        // given
+        String word = "사   과 수수박";
+
+        // when
+        List<Word> response = inspector.inspect(word);
+
+        // then
+        assertThat(response)
+            .hasSize(2)
+            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
+            .containsExactly(
+                tuple("사과", 0, 5),
+                tuple("수박", 7, 9)
             );
 
     }
@@ -146,7 +165,7 @@ class InspectorTest {
     }
 
     @Test
-    void 예외단어는_띄어쓰기를_무시하지않는다() {
+    void 예외단어는_띄어쓰기를_무시해야한다() {
         // given
         String word = "사과 주스";
 
@@ -154,12 +173,7 @@ class InspectorTest {
         List<Word> response = inspector.inspect(word);
 
         // then
-        assertThat(response)
-            .hasSize(1)
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
-            .containsExactly(
-                tuple("사과", 0, 2)
-            );
+        assertThat(response).hasSize(0);
 
     }
 

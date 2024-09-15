@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ban.inspector.RemoveNotKorean.*;
-
 class ExceptWordUtilTest {
 
     private static final ExceptWordUtil exceptWordUtil = new ExceptWordUtil();
@@ -28,13 +26,12 @@ class ExceptWordUtilTest {
     void 허용단어가_존재하면_제거() {
         // given
         String word = "고르곤졸라가 맛있어요";
-        String newWord = removeNotKorean(word);
 
         List<Word> banWords = new ArrayList<>();
-        banWords.add(new Word("졸라", 3));
+        banWords.add(new Word("졸라", 3, 5));
 
         // when
-        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(word, banWords);
 
         // then
         Assertions.assertThat(filter).hasSize(0);
@@ -45,14 +42,13 @@ class ExceptWordUtilTest {
     void 허용단어에_포함되어있지않으면_제거하지않는다() {
         // given
         String word = "고르곤졸라가 졸라맛있어요";
-        String newWord = removeNotKorean(word);
 
         List<Word> banWords = new ArrayList<>();
-        banWords.add(new Word("졸라", 3));
-        banWords.add(new Word("졸라", 6));
+        banWords.add(new Word("졸라", 3, 5));
+        banWords.add(new Word("졸라", 7, 9));
 
         // when
-        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(word, banWords);
 
         // then
         Assertions.assertThat(filter).hasSize(1);
@@ -63,15 +59,14 @@ class ExceptWordUtilTest {
     void 리스트가_비어있어도_예외가발생하지_않아야한다() {
         // given
         String word = "";
-        String newWord = removeNotKorean(word);
 
         List<Word> banWords = List.of();
 
         // when
-        List<Word> filter = exceptWordUtil.filter(newWord, banWords);
+        List<Word> filter = exceptWordUtil.filter(word, banWords);
 
         // then
-        Assertions.assertThat(filter).hasSize(0);
+        Assertions.assertThat(filter).isEmpty();
     }
 
 }
