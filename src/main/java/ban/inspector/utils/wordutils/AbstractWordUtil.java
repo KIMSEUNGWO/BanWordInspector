@@ -2,7 +2,7 @@ package ban.inspector.utils.wordutils;
 
 import ban.inspector.utils.WordUtil;
 
-public abstract class AbstractWordUtil<T extends AbstractWordUtil<T>> {
+public abstract class AbstractWordUtil {
 
     protected final WordUtil wordUtil;
 
@@ -19,5 +19,4 @@ public abstract class AbstractWordUtil<T extends AbstractWordUtil<T>> {
         wordUtil.build();
     }
 
-    public abstract T get();
 }

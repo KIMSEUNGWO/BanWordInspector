@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ExceptWordUtil extends AbstractWordUtil<ExceptWordUtil> {
+public class ExceptWordUtil extends AbstractWordUtil {
 
     public ExceptWordUtil(@Qualifier("except") WordUtil wordUtil) {
         super(wordUtil);
@@ -35,8 +35,4 @@ public class ExceptWordUtil extends AbstractWordUtil<ExceptWordUtil> {
         return newWords;
     }
 
-    @Override
-    public ExceptWordUtil get() {
-        return this;
-    }
 }

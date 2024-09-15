@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class BanWordUtil extends AbstractWordUtil<BanWordUtil> {
+public class BanWordUtil extends AbstractWordUtil {
 
     public BanWordUtil(@Qualifier("ban") WordUtil wordUtil) {
         super(wordUtil);
@@ -18,8 +18,4 @@ public class BanWordUtil extends AbstractWordUtil<BanWordUtil> {
         return wordUtil.search(word);
     }
 
-    @Override
-    public BanWordUtil get() {
-        return this;
-    }
 }
