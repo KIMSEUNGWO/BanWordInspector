@@ -9,4 +9,5 @@ public interface WordUtil {
     void addWord(String word);
     void build();
     List<Word> search(String word);
+
 }
