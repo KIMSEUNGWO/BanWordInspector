@@ -26,7 +26,7 @@ public class BanWordController {
 
     @GetMapping("/valid")
     public ResponseEntity<Response> valid(@RequestParam(name = "word") String word) {
-        List<String> result = inspector.inspect(word).stream().map(Word::getWord).toList();
+        List<Word> result = inspector.inspect(word);
         Response response = (result.isEmpty()) ? new Response(SUCCESS) : new BanWordListResponse(result);
         return ResponseEntity.ok(response);
     }

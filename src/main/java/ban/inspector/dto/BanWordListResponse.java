@@ -6,14 +6,14 @@ import static ban.inspector.config.Constant.*;
 
 public class BanWordListResponse extends Response  {
 
-    private final Collection<String> words;
+    private final Collection<Word> words;
 
-    public BanWordListResponse(Collection<String> words) {
+    public BanWordListResponse(Collection<Word> words) {
         super(FAIL);
         this.words = words;
     }
 
-    public Collection<String> getWords() {
+    public Collection<Word> getWords() {
         return words;
     }
 }

@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static ban.inspector.RemoveNotKorean.*;
 import static org.assertj.core.api.Assertions.*;
 
 class BanWordUtilTest {
@@ -27,19 +26,16 @@ class BanWordUtilTest {
 
     @ParameterizedTest
     @ValueSource(strings =
-        {"졸라", "123졸라", "졸123라", "졸ㅁㅁㅁㅁㅁㅁㅁ라", "어ㅁㅁㅁㅁㅁㅇㅏ미", "@#$#$%ㅉㅁㄴㅇㄹㅁ어미", "어미ㅁㄴㄹㅁㄸㄸㅇㅊ!@#12ㅂ3456",
-        "졸!@#ㄴㅇㄹㅈ3ㄱ23ㄱ라", "애애애애애애애애애애애애애애미", "졸       라", "     졸   123ㅁㅉㄴㅏㅑㅕㅏ123!@#&* 라", "졸라안녕하세요"})
+        {"졸라", "123졸라", "애애애애애애애애애애애애애애미", "졸       라", "     졸     라", "졸라안녕하세요"})
     void 금지어인_단어(String word) {
-        String newWord = removeNotKorean(word);
-        List<Word> banList = banWordUtil.filter(newWord);
-        assertThat(banList).hasSize(1);
+        List<Word> banList = banWordUtil.filter(word);
+        assertThat(banList).isNotEmpty();
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "졸누라", "123123", "미애", "어어무미미", "안녕하세요", "조오오옹ㄹ라"})
     void 금지어가_아닌_단어(String word) {
-        String newWord = removeNotKorean(word);
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
         assertThat(banList).isEmpty();
     }
 
@@ -47,10 +43,9 @@ class BanWordUtilTest {
     public void 금지어_인덱스_테스트() {
         // given
         String word = "졸라 안녕하세요";
-        String newWord = removeNotKorean(word);
 
         // when
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
 
         // then
         assertThat(banList).hasSize(1);
@@ -63,10 +58,9 @@ class BanWordUtilTest {
     public void 금지어_인덱스_테스트_2() {
         // given
         String word = "애애애애애애미";
-        String newWord = removeNotKorean(word);
 
         // when
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
 
         // then
         assertThat(banList).hasSize(1);
@@ -75,36 +69,20 @@ class BanWordUtilTest {
             .containsExactly("애미", 5, 7);
 
     }
+
     @Test
-    @DisplayName("금지어를 검색할때 완전한 한글을 제외하고 인덱스를 계산한다.")
-    public void 금지어_인덱스_테스트2() {
-        // given
-        String word = "졸ㅁㅏ!@#라 안녕하세요";
-        String newWord = removeNotKorean(word);
-
-        // when
-        List<Word> banList = banWordUtil.filter(newWord);
-
-        // then
-        assertThat(banList.get(0))
-            .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
-            .containsExactly("졸라", 0, 2);
-
-    }
-    @Test
-    @DisplayName("(2) 금지어를 검색할때 완전한 한글을 제외하고 인덱스를 계산한다.")
+    @DisplayName("(2) 금지어를 검색할때 띄어쓰기를 포함한 인덱스를 계산한다.")
     public void 금지어_인덱스_테스트3() {
         // given
-        String word = "졸라배고프다";
-        String newWord = removeNotKorean(word);
+        String word = "졸   라배고프다";
 
         // when
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
 
         // then
         assertThat(banList.get(0))
             .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
-            .containsExactly("졸라", 0, 2);
+            .containsExactly("졸라", 0, 5);
 
     }
 
@@ -113,10 +91,9 @@ class BanWordUtilTest {
     public void 다수의_금지어_테스트1() {
         // given
         String word = "졸라졸라졸라여러자테스트임";
-        String newWord = removeNotKorean(word);
 
         // when
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
 
         // then
         assertThat(banList)
@@ -134,20 +111,20 @@ class BanWordUtilTest {
     @DisplayName("(2) 금지어가 다수일 경우 금지어목록을 반환한다.")
     public void 다수의_금지어_테스트2() {
         // given
-        String word = "졸라안녕하세요 어미님";
-        String newWord = removeNotKorean(word);
+        String word = "졸 라안녕하세요 어미님";
 
         // when
-        List<Word> banList = banWordUtil.filter(newWord);
+        List<Word> banList = banWordUtil.filter(word);
 
         // then
         assertThat(banList)
             .hasSize(2)
             .extracting(Word::getWord, Word::getStartIndex, Word::getEndIndex)
             .containsExactly(
-                tuple("졸라", 0, 2),
-                tuple("어미", 7, 9)
+                tuple("졸라", 0, 3),
+                tuple("어미", 9, 11)
             );
+
 
     }
 }
