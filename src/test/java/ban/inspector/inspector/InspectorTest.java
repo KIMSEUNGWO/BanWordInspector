@@ -6,12 +6,9 @@ import ban.inspector.updater.WordLoader;
 import ban.inspector.updater.WordLoaderImpl;
 import ban.inspector.dto.Word;
 import ban.inspector.factory.*;
-import ban.inspector.updater.WordUpdater;
-import ban.inspector.updater.WordUpdaterImpl;
 import ban.inspector.utils.AhoCorasickWordUtil;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,10 +33,9 @@ class InspectorTest {
         inspectConfig.addBanWords(banFac);
         inspectConfig.addExceptWords(exceptFac);
 
-        WordUpdater updater = new WordUpdaterImpl(new ObjectMapper());
         WordLoader wordLoader = new WordLoaderImpl();
 
-        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordLoader, updater);
+        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordLoader);
         config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();

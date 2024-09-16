@@ -1,5 +1,6 @@
 package ban.inspector.updater;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,7 +31,7 @@ public class WordLoaderImpl implements WordLoader {
 
     private List<String> read(String path) {
         try {
-            return new ObjectMapper().readValue(new File(path), WordJsonData.class).getWords();
+            return new ObjectMapper().readValue(new File(path), new TypeReference<>() {});
         } catch (IOException e) {
             logger.error(e);
             return Collections.emptyList();
