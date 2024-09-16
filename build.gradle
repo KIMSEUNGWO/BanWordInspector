@@ -43,7 +43,7 @@ mavenPublishing {
 
 	signAllPublications()
 
-	coordinates("io.github.kimseungwo", "wordinspector", "0.0.7")
+	coordinates("io.github.kimseungwo", "wordinspector", "0.0.8")
 
 	pom {
 		name = "wordinspector"
