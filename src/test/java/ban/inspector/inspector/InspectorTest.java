@@ -9,6 +9,7 @@ import ban.inspector.factory.*;
 import ban.inspector.utils.AhoCorasickWordUtil;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -176,21 +177,48 @@ class InspectorTest {
     }
 
     @Test
-    void test() {
+    @DisplayName("문자열이 Null이어도 예외가 발생하지 않아야한다.")
+    void 빈문자열테스트() {
         // given
-        String word = "멜론";
+        String word = null;
 
         // when
         List<Word> response = inspector.inspect(word);
 
         // then
-        assertThat(response)
-            .hasSize(1)
-            .extracting(Word::word, Word::startIndex, Word::endIndex)
-            .containsExactly(
-                tuple("멜론", 0, 2)
-            );
+        assertThat(response).isEmpty();
+    }
 
+
+    @ParameterizedTest
+    @DisplayName("블라인드는 금지어의 길이와 상관없이 하나의 문자열로 대체된다.")
+    @ValueSource(strings = {"바나나", "사과", "오렌지", "수박", "멜론", "수          박", "바       나      나", "사 과"})
+    void 금지어_블라인드테스트(String word) {
+        // when
+        String mask = inspector.mask(word);
+
+        // then
+        assertThat(mask).isEqualTo("?");
+    }
+
+    @Test
+    @DisplayName("대체될 문자열은 사용자가 임의로 선택할 수 있다.")
+    void 금지어_블라인드테스트2() {
+        String word = "사 과사과";
+        String replace = "!@#!@#!@#!@#";
+
+        String mask = inspector.mask(word, replace);
+        assertThat(mask).isEqualTo(replace.repeat(2));
+    }
+
+    @Test
+    @DisplayName("예외단어는 블라인드되면 안된다.")
+    void 금지어_블라인드테스트3() {
+        String word = "사 과사과주스";
+        String replace = "!@#!@#!@#!@#";
+
+        String mask = inspector.mask(word, replace);
+        assertThat(mask).isEqualTo(replace + "사과주스");
     }
 
 

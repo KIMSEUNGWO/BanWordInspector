@@ -125,6 +125,19 @@ class BanWordUtilTest {
                 tuple("어미", 9, 11)
             );
 
+    }
+
+    @Test
+    @DisplayName("문자열이 Null 이어도 예외가 발생하지 않아야한다.")
+    void 문자열이_null이어도_예외가_발생하지_않아야한다() {
+        // given
+        String word = null;
+
+        // when
+        List<Word> filter = banWordUtil.filter(word);
+
+        // then
+        assertThat(filter).isEmpty();
 
     }
 }

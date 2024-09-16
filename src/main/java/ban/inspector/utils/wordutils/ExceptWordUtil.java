@@ -19,14 +19,14 @@ public class ExceptWordUtil extends AbstractWordUtil {
         return (banWords.isEmpty()) ? List.of() : expectFilter(newWord, banWords);
     }
 
-    private List<Word> expectFilter(String newWord, List<Word> beforeWords) {
+    private List<Word> expectFilter(String newWord, List<Word> banWords) {
         List<Word> exceptWords = wordUtil.search(newWord);
 
-        if (exceptWords.isEmpty()) return beforeWords;
+        if (exceptWords.isEmpty()) return banWords;
 
         List<Word> newWords = new ArrayList<>();
 
-        a:for (Word banWord : beforeWords) {
+        a:for (Word banWord : banWords) {
             for (Word exceptWord : exceptWords) {
                 if (banWord.isInclude(exceptWord)) continue a;
             }

@@ -55,10 +55,10 @@ class ExceptWordUtilTest {
     }
 
     @Test
-    @DisplayName("금지단어가 존재하지않아도 예외가 발생하지 않아야한다.")
+    @DisplayName("문자열이 존재하지않아도 예외가 발생하지 않아야한다.")
     void 리스트가_비어있어도_예외가발생하지_않아야한다() {
         // given
-        String word = "";
+        String word = null;
 
         List<Word> banWords = List.of();
 

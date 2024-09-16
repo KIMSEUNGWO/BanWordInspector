@@ -14,10 +14,9 @@ public interface Inspector {
 
     default String mask(String word, String replace) {
         StringBuilder sb = new StringBuilder(word);
-        int removeCharCount = 0;
-        for (Word data : inspect(word)) {
-            sb.replace(data.startIndex() - removeCharCount, data.endIndex() - removeCharCount, replace);
-            removeCharCount += data.word().length() - 1;
+        List<Word> data = inspect(word);
+        for (int i = data.size() - 1; i >= 0; i--) {
+            sb.replace(data.get(i).startIndex(), data.get(i).endIndex(), replace);
         }
         return sb.toString();
     }

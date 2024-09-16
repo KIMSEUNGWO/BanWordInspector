@@ -8,18 +8,16 @@ import java.util.*;
 @Component
 public class AhoCorasickWordUtil implements WordUtil {
 
-    static class TrieNode {
-        Map<Character, TrieNode> children = new HashMap<>();
-        TrieNode failureLink = null;
-        Set<String> output = new HashSet<>();
-
-        public TrieNode() {}
-    }
-
     private final TrieNode root;
 
     public AhoCorasickWordUtil() {
         this.root = new TrieNode();
+    }
+
+    static private class TrieNode {
+        Map<Character, TrieNode> children = new HashMap<>();
+        TrieNode failureLink = null;
+        Set<String> output = new HashSet<>();
     }
 
     @Override
@@ -68,6 +66,7 @@ public class AhoCorasickWordUtil implements WordUtil {
     @Override
     public List<Word> search(String word) {
         List<Word> result = new ArrayList<>();
+        if (word == null || word.isEmpty()) return result;
         TrieNode node = root;
 
         int realIndex = 0;       // 실제 문자열에서의 인덱스를 추적하는 변수
