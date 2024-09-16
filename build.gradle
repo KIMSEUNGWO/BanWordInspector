@@ -32,7 +32,7 @@ repositories {
 }
 
 signing {
-	useGpgCmd()
+//	useGpgCmd()
 	sign publishing.publications
 }
 
@@ -41,7 +41,7 @@ mavenPublishing {
 //	configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
 	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-//	signAllPublications()
+	signAllPublications()
 
 	coordinates("io.github.kimseungwo", "wordinspector", "0.0.1")
 
