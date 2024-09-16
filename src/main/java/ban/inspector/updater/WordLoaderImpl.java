@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +30,7 @@ public class WordLoaderImpl implements WordLoader {
 
     private List<String> read(String path) {
         try {
-            return new ObjectMapper().readValue(new File(path), new TypeReference<>() {});
+            return new ObjectMapper().readValue(new ClassPathResource(path).getInputStream(), new TypeReference<>() {});
         } catch (IOException e) {
             logger.error(e);
             return Collections.emptyList();
