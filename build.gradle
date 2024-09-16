@@ -1,8 +1,15 @@
+import com.vanniktech.maven.publish.SonatypeHost
+import com.vanniktech.maven.publish.JavaLibrary
+import com.vanniktech.maven.publish.JavadocJar
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.0'
 	id 'io.spring.dependency-management' version '1.1.5'
-	id 'me.champeau.jmh' version '0.6.8'
+
+	// 배포 플러그인
+	id "com.vanniktech.maven.publish" version "0.28.0"
+	id 'signing' // GPG 서명을 위한 플러그인
 }
 
 group = 'ban'
@@ -24,10 +31,51 @@ repositories {
 	mavenCentral()
 }
 
+signing {
+	useGpgCmd()
+	sign publishing.publications
+}
+
+
+mavenPublishing {
+//	configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
+	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+//	signAllPublications()
+
+	coordinates("io.github.kimseungwo", "wordinspector", "0.0.1")
+
+	pom {
+		name = "wordinspector"
+		description = "금지어 검사와 블라인드처리하는 라이브러리"
+		inceptionYear = "2024"
+		url = "<https://github.com/KIMSEUNGWO/BanWordInspector>"
+		licenses {
+			license {
+				name = "The Apache License, Version 2.0"
+				url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+				distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+			}
+		}
+		developers {
+			developer {
+				id = "tmd8633"
+				name = "Seungwoo Kim"
+				url = "https://github.com/KIMSEUNGWO"
+			}
+		}
+		scm {
+			connection = 'scm:git:github.com/KIMSEUNGWO/BanWordInspector.git'
+			developerConnection = 'scm:git:ssh://github.com:KIMSEUNGWO/BanWordInspector.git'
+			url = '<https://github.com/KIMSEUNGWO/BanWordInspector/tree/main>'
+		}
+	}
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.3.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.1'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 }
 
 tasks.named('test') {
