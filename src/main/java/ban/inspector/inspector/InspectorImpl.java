@@ -1,7 +1,7 @@
 package ban.inspector.inspector;
 
-import ban.inspector.config.InnerInspectConfig;
-import ban.inspector.dto.Word;
+import ban.inspector.config.innerConfig.InnerInspectConfig;
+import ban.inspector.domain.Word;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.springframework.beans.factory.annotation.Autowired;

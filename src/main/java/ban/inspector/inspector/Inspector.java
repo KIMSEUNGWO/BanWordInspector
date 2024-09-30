@@ -1,6 +1,6 @@
 package ban.inspector.inspector;
 
-import ban.inspector.dto.Word;
+import ban.inspector.domain.Word;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package ban.inspector.utils;
 
-import ban.inspector.dto.Word;
+import ban.inspector.domain.Word;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

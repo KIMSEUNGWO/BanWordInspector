@@ -1,4 +1,4 @@
-package ban.inspector.dto;
+package ban.inspector.domain;
 
 public record Word(String word, int startIndex, int endIndex) {
 

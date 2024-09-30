@@ -1,10 +1,8 @@
 package ban.inspector.inspector;
 
 import ban.inspector.config.InspectConfig;
-import ban.inspector.config.InnerInspectConfig;
-import ban.inspector.updater.WordLoader;
-import ban.inspector.updater.WordLoaderImpl;
-import ban.inspector.dto.Word;
+import ban.inspector.config.innerConfig.InnerInspectConfig;
+import ban.inspector.domain.Word;
 import ban.inspector.factory.*;
 import ban.inspector.utils.AhoCorasickWordUtil;
 import ban.inspector.utils.wordutils.BanWordUtil;
@@ -33,9 +31,8 @@ class InspectorTest {
         inspectConfig.addBanWords(banFac);
         inspectConfig.addExceptWords(exceptFac);
 
-        WordLoader wordLoader = new WordLoaderImpl();
 
-        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac, wordLoader);
+        InnerInspectConfig config = new InnerInspectConfig(banFac, exceptFac);
         config.setInspectConfig(inspectConfig);
         banFac.build();
         exceptFac.build();

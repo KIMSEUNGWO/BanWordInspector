@@ -1,7 +1,7 @@
-package ban.inspector.config;
+package ban.inspector.config.innerConfig;
 
+import ban.inspector.config.InspectConfig;
 import ban.inspector.factory.WordFactoryBuilder;
-import ban.inspector.updater.WordLoader;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import ban.inspector.utils.wordutils.ExceptWordUtil;
 import jakarta.annotation.PostConstruct;
@@ -13,14 +13,12 @@ public class InnerInspectConfig {
 
     private final WordFactoryBuilder<BanWordUtil> banWordFactory;
     private final WordFactoryBuilder<ExceptWordUtil> exceptWordFactory;
-    private final WordLoader wordLoader;
     private InspectConfig inspectConfig;
 
     @Autowired
-    public InnerInspectConfig(WordFactoryBuilder<BanWordUtil> banWordFactory, WordFactoryBuilder<ExceptWordUtil> exceptWordFactory, WordLoader wordLoader) {
+    public InnerInspectConfig(WordFactoryBuilder<BanWordUtil> banWordFactory, WordFactoryBuilder<ExceptWordUtil> exceptWordFactory) {
         this.banWordFactory = banWordFactory;
         this.exceptWordFactory = exceptWordFactory;
-        this.wordLoader = wordLoader;
     }
 
     @Autowired(required = false)
@@ -34,9 +32,6 @@ public class InnerInspectConfig {
             inspectConfig.addBanWords(banWordFactory);
             inspectConfig.addExceptWords(exceptWordFactory);
         }
-
-        banWordFactory.add(wordLoader.readBanWords());
-        exceptWordFactory.add(wordLoader.readExceptWords());
     }
 
     public BanWordUtil getBanWordUtil() {

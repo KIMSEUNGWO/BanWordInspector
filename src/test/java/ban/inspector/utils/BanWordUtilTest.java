@@ -1,6 +1,6 @@
 package ban.inspector.utils;
 
-import ban.inspector.dto.Word;
+import ban.inspector.domain.Word;
 import ban.inspector.utils.wordutils.BanWordUtil;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

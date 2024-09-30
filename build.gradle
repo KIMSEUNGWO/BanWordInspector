@@ -1,6 +1,4 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import com.vanniktech.maven.publish.JavaLibrary
-import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
 	id 'java'
@@ -38,12 +36,11 @@ signing {
 
 
 mavenPublishing {
-//	configure(new JavaLibrary(new JavadocJar.Javadoc(), true))
 	publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
 	signAllPublications()
 
-	coordinates("io.github.kimseungwo", "wordinspector", "0.0.8")
+	coordinates("io.github.kimseungwo", "wordinspector", "0.0.9")
 
 	pom {
 		name = "wordinspector"
