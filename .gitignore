@@ -39,5 +39,3 @@ application.properties
 
 ### VS Code ###
 .vscode/
-
-.gradle/**
